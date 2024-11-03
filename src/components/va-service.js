@@ -38,6 +38,12 @@ customElements.define(
         agentNotes: {
           type: String,
         },
+        user: {
+          type: Object,
+        },
+        image: {
+          type: String,
+        },
       };
     }
 
@@ -131,11 +137,11 @@ customElements.define(
         </style>
         <sl-card>
           <img slot="image" src="${this.image}" />
-          <!-- <h2>${this.name}</h2>
-          <h3>$${this.price}</h3> -->
+          <h2>${this.serviceType}</h2>
+          <h3>$${this.serviceType}</h3>
           <!-- this reference to the user obj should work because we have stringified when passing in home.js -->
           <!-- styling happens inside the web component -->
-          <p class="author">By ${this.user.firstName} ${this.user.lastName}</p>
+
           <!-- event listener being added inline -->
           <sl-button @click=${this.moreInfoHandler.bind(this)}
             >More Info</sl-button

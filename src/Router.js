@@ -10,6 +10,7 @@ import hairdressersView from "./views/pages/hairdressers";
 import haircutsView from "./views/pages/haircuts";
 import favoriteHaircutsView from "./views/pages/favoriteHaircuts";
 import newHaircutView from "./views/pages/newHaircut";
+import servicesView from "./views/pages/services";
 
 // define routes
 // these are the pages within our SPA
@@ -28,6 +29,7 @@ const routes = {
   "/profile": profileView,
   "/editProfile": editProfileView,
   "/newHaircut": newHaircutView,
+  "/services": servicesView,
 };
 
 class Router {

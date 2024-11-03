@@ -6,7 +6,7 @@ import App from "./App";
 import Auth from "./Auth";
 import Toast from "./Toast";
 
-class HaircutAPI {
+class ServiceAPI {
   async newHaircut(formData) {
     // send fetch request
     const response = await fetch(`${App.apiBase}/haircut`, {
@@ -34,9 +34,9 @@ class HaircutAPI {
     return data;
   }
 
-  async getHaircuts() {
+  async getServices() {
     // fetch the json data
-    const response = await fetch(`${App.apiBase}/haircut`, {
+    const response = await fetch(`${App.apiBase}/service`, {
       headers: { Authorization: `Bearer ${localStorage.accessToken}` },
     });
 
@@ -46,7 +46,7 @@ class HaircutAPI {
       const err = await response.json();
       if (err) console.log(err);
       // throw error (exit this function)
-      throw new Error("Problem getting haircuts");
+      throw new Error("Problem getting services");
     }
 
     // convert response payload into json - store as data
@@ -57,4 +57,4 @@ class HaircutAPI {
   }
 }
 
-export default new HaircutAPI();
+export default new ServiceAPI();

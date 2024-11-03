@@ -5,6 +5,7 @@ import App from "./App.js";
 // of the other files
 import "./components/va-app-header";
 import "./components/va-haircut";
+import "./components/va-service";
 
 // styles
 import "./scss/master.scss";
