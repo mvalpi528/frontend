@@ -1,0 +1,17 @@
+0 Change app name - src/App.js 
+1 change logo
+2 change colours
+3 create views:
+- guide page
+- hairdressers (find a hairdresser)
+- haircuts (find a haircut)
+- favourite haircuts
+4. update sign up form
+- backend:
+  - models/User.js - add bio and accessLevel fields to schema
+  - routes/user 
+    - update the update user route need to include the new values
+- frontend:
+  - views/signup.js - add <sl-select> selection for accessLevel
+  - views/editProfile.js - add bio textarea
+  - views/profile.js - add bio
