@@ -210,11 +210,7 @@ customElements.define(
                   >Add Haircut</a
                 >`
               : html``}
-            <a href="/hairdressers" @click="${this.menuClick}">Hairdressers</a>
-            <a href="/haircuts" @click="${this.menuClick}">Haircuts</a>
-            <a href="/favoriteHaircuts" @click="${this.menuClick}"
-              >Favorite Haircuts</a
-            >
+            <a href="/services" @click="${this.menuClick}">Services</a>
             <a href="/profile" @click="${this.menuClick}">Profile</a>
             <a href="#" @click="${() => Auth.signOut()}">Sign Out</a>
           </nav>

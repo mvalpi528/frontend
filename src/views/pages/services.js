@@ -25,7 +25,7 @@ class servicesView {
     try {
       // returns a json object of all out haircuts and store in variable
       // this takes some time so we need to do this asynchronously
-      this.services = await ServiceAPI.getServices();
+      this.services = await ServiceAPI.getServiceTypes();
       console.log(this.services);
       // re renders the page now that we have loaded the services in
       this.render();
@@ -50,16 +50,14 @@ class servicesView {
               // remember using apiBase is like writing http://localhost:3000
               html` ${this.services.map(
                 (service) => html`
-                  <va-service
+                  <va-service-type
                     id="${service._id}"
                     class="service-card"
                     serviceType="${service.serviceType}"
-                    startDate="${service.startDate}"
-                    endDate="${service.endDate}"
-                    endOfServiceReason="${service.endOfServiceReason}"
-                    agentNotes="${service.agentNotes}"
+                    description="${service.description}"
+                    image="${App.apiBase}/images/${service.image}"
                   >
-                  </va-service>
+                  </va-service-type>
                 `
               )}`}
         </div>

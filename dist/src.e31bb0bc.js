@@ -14467,6 +14467,28 @@ class ServiceAPI {
     return data;
   }
 
+  async getServiceTypes() {
+    // fetch the json data
+    const response = await fetch("".concat(_App.default.apiBase, "/serviceType"), {
+      headers: {
+        Authorization: "Bearer ".concat(localStorage.accessToken)
+      }
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // throw error (exit this function)
+
+      throw new Error("Problem getting services");
+    } // convert response payload into json - store as data
+
+
+    const data = await response.json(); // return data
+
+    return data;
+  }
+
 }
 
 var _default = new ServiceAPI();
@@ -14497,7 +14519,7 @@ var _Toast = _interopRequireDefault(require("../../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n                  <va-service\n                    id=\"", "\"\n                    class=\"service-card\"\n                    serviceType=\"", "\"\n                    startDate=\"", "\"\n                    endDate=\"", "\"\n                    endOfServiceReason=\"", "\"\n                    agentNotes=\"", "\"\n                  >\n                  </va-service>\n                "]);
+  const data = _taggedTemplateLiteral(["\n                  <va-service-type\n                    id=\"", "\"\n                    class=\"service-card\"\n                    serviceType=\"", "\"\n                    description=\"", "\"\n                    image=\"", "/images/", "\"\n                  >\n                  </va-service-type>\n                "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -14558,7 +14580,7 @@ class servicesView {
     try {
       // returns a json object of all out haircuts and store in variable
       // this takes some time so we need to do this asynchronously
-      this.services = await _ServiceAPI.default.getServices();
+      this.services = await _ServiceAPI.default.getServiceTypes();
       console.log(this.services); // re renders the page now that we have loaded the services in
 
       this.render();
@@ -14571,7 +14593,7 @@ class servicesView {
   render() {
     const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), this.services == null ? (0, _litHtml.html)(_templateObject2()) : // map is basically like a for each
     // remember using apiBase is like writing http://localhost:3000
-    (0, _litHtml.html)(_templateObject3(), this.services.map(service => (0, _litHtml.html)(_templateObject4(), service._id, service.serviceType, service.startDate, service.endDate, service.endOfServiceReason, service.agentNotes))));
+    (0, _litHtml.html)(_templateObject3(), this.services.map(service => (0, _litHtml.html)(_templateObject4(), service._id, service.serviceType, service.description, _App.default.apiBase, service.image))));
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -16552,7 +16574,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n        <style>\n          * {\n            box-sizing: border-box;\n          }\n          .app-header {\n            background: var(--brand-color);\n            position: fixed;\n            top: 0;\n            right: 0;\n            left: 0;\n            height: var(--app-header-height);\n            color: #fff;\n            display: flex;\n            z-index: 9;\n            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);\n            align-items: center;\n          }\n\n          .app-header-main {\n            flex-grow: 1;\n            display: flex;\n            align-items: center;\n          }\n\n          .app-header-main::slotted(h1) {\n            color: #fff;\n          }\n\n          .app-logo a {\n            color: #fff;\n            text-decoration: none;\n            font-weight: bold;\n            font-size: 1.2em;\n            padding: 0.6em;\n            display: inline-block;\n          }\n\n          .app-logo img {\n            width: 90px;\n          }\n\n          .hamburger-btn::part(base) {\n            color: #fff;\n          }\n\n          .app-top-nav {\n            display: flex;\n            height: 100%;\n            align-items: center;\n          }\n\n          .app-top-nav a {\n            display: inline-block;\n            padding: 0.8em;\n            text-decoration: none;\n            color: #fff;\n          }\n\n          .app-side-menu-items a {\n            display: block;\n            padding: 0.5em;\n            text-decoration: none;\n            font-size: 1.3em;\n            color: #333;\n          }\n\n          .app-side-menu-logo {\n            width: 120px;\n            margin-bottom: 1em;\n            position: absolute;\n            top: 2em;\n            left: 1.5em;\n          }\n\n          .page-title {\n            color: var(--app-header-txt-color);\n            margin-right: 0.5em;\n            font-size: var(--app-header-title-font-size);\n          }\n\n          /* active nav links */\n          .app-top-nav a.active,\n          .app-side-menu-items a.active {\n            font-weight: bold;\n          }\n\n          /* RESPONSIVE - MOBILE ------------------- */\n          @media all and (max-width: 768px) {\n            .app-top-nav {\n              display: none;\n            }\n          }\n        </style>\n\n        <header class=\"app-header\">\n          <sl-icon-button\n            class=\"hamburger-btn\"\n            name=\"list\"\n            @click=\"", "\"\n            style=\"font-size: 1.5em;\"\n          ></sl-icon-button>\n\n          <div class=\"app-header-main\">\n            ", "\n            <slot></slot>\n          </div>\n\n          <nav class=\"app-top-nav\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n\n            <!-- can access a user becuase they are passed into components as a property -->\n            ", "\n            <sl-dropdown>\n              <a slot=\"trigger\" href=\"#\" @click=\"", "\">\n                <sl-avatar\n                  style=\"--size: 24px;\"\n                  image=", "\n                ></sl-avatar>\n                ", "\n              </a>\n              <sl-menu>\n                <sl-menu-item @click=\"", "\"\n                  >Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Edit Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Sign Out</sl-menu-item\n                >\n              </sl-menu>\n            </sl-dropdown>\n          </nav>\n        </header>\n\n        <sl-drawer class=\"app-side-menu\" placement=\"left\">\n          <img class=\"app-side-menu-logo\" src=\"/images/logo.svg\" />\n          <nav class=\"app-side-menu-items\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n            ", "\n            <a href=\"/hairdressers\" @click=\"", "\">Hairdressers</a>\n            <a href=\"/haircuts\" @click=\"", "\">Haircuts</a>\n            <a href=\"/favoriteHaircuts\" @click=\"", "\"\n              >Favorite Haircuts</a\n            >\n            <a href=\"/profile\" @click=\"", "\">Profile</a>\n            <a href=\"#\" @click=\"", "\">Sign Out</a>\n          </nav>\n        </sl-drawer>\n      "]);
+  const data = _taggedTemplateLiteral(["\n        <style>\n          * {\n            box-sizing: border-box;\n          }\n          .app-header {\n            background: var(--brand-color);\n            position: fixed;\n            top: 0;\n            right: 0;\n            left: 0;\n            height: var(--app-header-height);\n            color: #fff;\n            display: flex;\n            z-index: 9;\n            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);\n            align-items: center;\n          }\n\n          .app-header-main {\n            flex-grow: 1;\n            display: flex;\n            align-items: center;\n          }\n\n          .app-header-main::slotted(h1) {\n            color: #fff;\n          }\n\n          .app-logo a {\n            color: #fff;\n            text-decoration: none;\n            font-weight: bold;\n            font-size: 1.2em;\n            padding: 0.6em;\n            display: inline-block;\n          }\n\n          .app-logo img {\n            width: 90px;\n          }\n\n          .hamburger-btn::part(base) {\n            color: #fff;\n          }\n\n          .app-top-nav {\n            display: flex;\n            height: 100%;\n            align-items: center;\n          }\n\n          .app-top-nav a {\n            display: inline-block;\n            padding: 0.8em;\n            text-decoration: none;\n            color: #fff;\n          }\n\n          .app-side-menu-items a {\n            display: block;\n            padding: 0.5em;\n            text-decoration: none;\n            font-size: 1.3em;\n            color: #333;\n          }\n\n          .app-side-menu-logo {\n            width: 120px;\n            margin-bottom: 1em;\n            position: absolute;\n            top: 2em;\n            left: 1.5em;\n          }\n\n          .page-title {\n            color: var(--app-header-txt-color);\n            margin-right: 0.5em;\n            font-size: var(--app-header-title-font-size);\n          }\n\n          /* active nav links */\n          .app-top-nav a.active,\n          .app-side-menu-items a.active {\n            font-weight: bold;\n          }\n\n          /* RESPONSIVE - MOBILE ------------------- */\n          @media all and (max-width: 768px) {\n            .app-top-nav {\n              display: none;\n            }\n          }\n        </style>\n\n        <header class=\"app-header\">\n          <sl-icon-button\n            class=\"hamburger-btn\"\n            name=\"list\"\n            @click=\"", "\"\n            style=\"font-size: 1.5em;\"\n          ></sl-icon-button>\n\n          <div class=\"app-header-main\">\n            ", "\n            <slot></slot>\n          </div>\n\n          <nav class=\"app-top-nav\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n\n            <!-- can access a user becuase they are passed into components as a property -->\n            ", "\n            <sl-dropdown>\n              <a slot=\"trigger\" href=\"#\" @click=\"", "\">\n                <sl-avatar\n                  style=\"--size: 24px;\"\n                  image=", "\n                ></sl-avatar>\n                ", "\n              </a>\n              <sl-menu>\n                <sl-menu-item @click=\"", "\"\n                  >Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Edit Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Sign Out</sl-menu-item\n                >\n              </sl-menu>\n            </sl-dropdown>\n          </nav>\n        </header>\n\n        <sl-drawer class=\"app-side-menu\" placement=\"left\">\n          <img class=\"app-side-menu-logo\" src=\"/images/logo.svg\" />\n          <nav class=\"app-side-menu-items\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n            ", "\n            <a href=\"/services\" @click=\"", "\">Services</a>\n            <a href=\"/profile\" @click=\"", "\">Profile</a>\n            <a href=\"#\" @click=\"", "\">Sign Out</a>\n          </nav>\n        </sl-drawer>\n      "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16614,7 +16636,7 @@ customElements.define("va-app-header", class AppHeader extends _litElement.LitEl
   }
 
   render() {
-    return (0, _litElement.html)(_templateObject(), this.hamburgerClick, this.title ? (0, _litElement.html)(_templateObject2(), this.title) : "", _Router.anchorRoute, this.user.accessLevel == 2 ? (0, _litElement.html)(_templateObject3(), _Router.anchorRoute) : (0, _litElement.html)(_templateObject4()), e => e.preventDefault(), this.user && this.user.avatar ? "".concat(_App.default.apiBase, "/images/").concat(this.user.avatar) : "", this.user && this.user.firstName, () => (0, _Router.gotoRoute)("/profile"), () => (0, _Router.gotoRoute)("/editProfile"), () => _Auth.default.signOut(), this.menuClick, this.user.accessLevel == 2 ? (0, _litElement.html)(_templateObject5(), this.menuClick) : (0, _litElement.html)(_templateObject6()), this.menuClick, this.menuClick, this.menuClick, this.menuClick, () => _Auth.default.signOut());
+    return (0, _litElement.html)(_templateObject(), this.hamburgerClick, this.title ? (0, _litElement.html)(_templateObject2(), this.title) : "", _Router.anchorRoute, this.user.accessLevel == 2 ? (0, _litElement.html)(_templateObject3(), _Router.anchorRoute) : (0, _litElement.html)(_templateObject4()), e => e.preventDefault(), this.user && this.user.avatar ? "".concat(_App.default.apiBase, "/images/").concat(this.user.avatar) : "", this.user && this.user.firstName, () => (0, _Router.gotoRoute)("/profile"), () => (0, _Router.gotoRoute)("/editProfile"), () => _Auth.default.signOut(), this.menuClick, this.user.accessLevel == 2 ? (0, _litElement.html)(_templateObject5(), this.menuClick) : (0, _litElement.html)(_templateObject6()), this.menuClick, this.menuClick, () => _Auth.default.signOut());
   }
 
 });
@@ -16872,6 +16894,160 @@ customElements.define("va-service", class Service extends _litElement.LitElement
   }
 
 });
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js"}],"components/va-service-type.js":[function(require,module,exports) {
+"use strict";
+
+var _litElement = require("@polymer/lit-element");
+
+var _litHtml = require("lit-html");
+
+var _Router = require("../Router");
+
+var _Auth = _interopRequireDefault(require("../Auth"));
+
+var _App = _interopRequireDefault(require("../App"));
+
+var _UserAPI = _interopRequireDefault(require("../UserAPI"));
+
+var _Toast = _interopRequireDefault(require("../Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral([" <style>\n          .author {\n            font-size: 0.9em;\n            font-style: italic;\n            opacity: 0.8;\n          }\n\n          img {\n            max-width: 100%; /* Image will not exceed card width */\n            max-height: 200px; /* Restricts image height */\n            width: 100%; /* Scales image to fit card width */\n            object-fit: cover; /* Ensures the image scales nicely within the card */\n            display: block; /* Removes any extra spacing below the image */\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <p>", "</p>\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >More Info</sl-button\n          >\n        </sl-card>"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1>", "</h1>\n            <p>", "</p>\n\n            <sl-button @click=", ">\n              <sl-icon slot=\"prefix\" name=\"heart-fill\"></sl-icon>\n              Add to Favourites\n            </sl-button>\n\n            <!-- Booking form -->\n\n            <h1>New Booking</h1>\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"start-date\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"notes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Book Now</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+// creating a custom web component
+// import this component in index.js
+customElements.define("va-service-type", class ServiceType extends _litElement.LitElement {
+  constructor() {
+    // runs the lit element constructor
+    super();
+  } // defining the html attributes e.g. title="hello"
+  // we can use this to pass in data from the db
+
+
+  static get properties() {
+    return {
+      id: {
+        type: String
+      },
+      serviceType: {
+        type: String
+      },
+      description: {
+        type: String
+      },
+      image: {
+        type: String
+      }
+    };
+  }
+
+  firstUpdated() {
+    super.firstUpdated();
+  } // because this function has been called by an event listener on a button
+  // it thinks that the 'this' keyword refers to 'this button' which is why we added .bind(this)
+
+
+  bookServiceHandler() {
+    // dialogs need to be added to the bottom of a html page so you should create it inside this method
+    const dialogEl = document.createElement("sl-dialog");
+    dialogEl.noHeader = true; // add class name so we can style it later on
+
+    dialogEl.className = "service-dialog"; // add some content to the dialog
+    // style the dialog itself in _base.scss
+
+    const dialogContent = (0, _litElement.html)(_templateObject(), this.image, this.serviceType, this.serviceType, this.description, this.addFavHandler.bind(this), this.newBookingSubmitHandler, _Auth.default.currentUser._id);
+    (0, _litHtml.render)(dialogContent, dialogEl); // append to document.body - remember that this needs to occur at the bottom of the document
+
+    document.body.append(dialogEl); // show sl-dialog
+
+    dialogEl.show(); // by default, dialog elements are not deleted from the DOM on hide
+    // we need to specify that the dialog should be deleted on hide
+
+    dialogEl.addEventListener("sl-after-hide", () => {
+      dialogEl.remove();
+    });
+  } // TODO - convert this from making a new haircut to making a new service booking
+
+
+  async newBookingSubmitHandler(e) {
+    // sl form still behaves like a normal form in that its default
+    // behaviour is to refresh the page on submit
+    e.preventDefault(); // Send form data to HaircutAPI.newHaircut() to pass on to the db
+
+    const submitBtn = document.querySelector(".submit-btn");
+    submitBtn.setAttribute("loading", "");
+    const formData = e.detail.formData; // the rest of the logic will be handled in the HaircutAPI which we have to import
+    // to get access to. because it needs to happen async put in a try catch
+
+    try {
+      await HaircutAPI.newHaircut(formData);
+
+      _Toast.default.show("Haircut added!"); // remove loading attribute
+
+
+      submitBtn.removeAttribute("loading"); // reset form - with a normal html form you can do this in one line
+      // because this is a custom form we have to do everything manually
+      // reset text inputs
+
+      const textInputs = document.querySelectorAll("sl-input");
+      if (textInputs) textInputs.forEach(textInput => textInput.value = null); // reset textarea input
+
+      const textAreaInput = document.querySelector("sl-textarea");
+      textAreaInput.value = ""; // reset radio inputs
+
+      const radioInputs = document.querySelectorAll("sl-radio");
+      if (radioInputs) radioInputs.forEach(radioInput => radioInput.removeAttribute("checked")); // reset file input
+
+      const fileInput = document.querySelector("input[type=file]");
+      if (fileInput) fileInput.value = null;
+    } catch (err) {
+      _Toast.default.show(err, "error");
+
+      submitBtn.removeAttribute("loading");
+    }
+  } // communicates to the backend via the API
+  // async because the UserAPI has to talk to the backend which uses await
+
+
+  async addFavHandler() {
+    try {
+      await _UserAPI.default.addFavHaircut(this.id);
+
+      _Toast.default.show("Haircut added to favourites");
+    } catch (err) {
+      _Toast.default.show(err, "error");
+    }
+  } // custom components use the 'shadow DOM' so anything defined in here
+  // does not interfere with the outside document
+  // you can think of it as being locally scoped or isolated from the rest of the project
+
+
+  render() {
+    return (0, _litElement.html)(_templateObject2(), this.image, this.serviceType, this.description, this.bookServiceHandler.bind(this));
+  }
+
+});
 },{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
@@ -16955,6 +17131,8 @@ require("./components/va-haircut");
 
 require("./components/va-service");
 
+require("./components/va-service-type");
+
 require("./scss/master.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -16967,7 +17145,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener("DOMContentLoaded", () => {
   _App.default.init();
 });
-},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./components/va-haircut":"components/va-haircut.js","./components/va-service":"components/va-service.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./components/va-haircut":"components/va-haircut.js","./components/va-service":"components/va-service.js","./components/va-service-type":"components/va-service-type.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -16995,7 +17173,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63819" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57120" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
