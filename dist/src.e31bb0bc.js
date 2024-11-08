@@ -13738,6 +13738,28 @@ class UserAPI {
     const data = await response.json(); // return data
 
     return data;
+  }
+
+  async getUsers() {
+    // fetch the json data
+    const response = await fetch("".concat(_App.default.apiBase, "/user"), {
+      headers: {
+        Authorization: "Bearer ".concat(localStorage.accessToken)
+      }
+    }); // if response not ok
+
+    if (!response.ok) {
+      // console log error
+      const err = await response.json();
+      if (err) console.log(err); // throw error (exit this function)
+
+      throw new Error("Problem getting user");
+    } // convert response payload into json - store as data
+
+
+    const data = await response.json(); // return data
+
+    return data;
   } // manages the interaction between the front and back end for adding a favorite
 
 
@@ -14710,7 +14732,115 @@ class MyServicesView {
 var _default = new MyServicesView();
 
 exports.default = _default;
-},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../ServiceAPI":"ServiceAPI.js","../../Toast":"Toast.js"}],"Router.js":[function(require,module,exports) {
+},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../ServiceAPI":"ServiceAPI.js","../../Toast":"Toast.js"}],"views/pages/users.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _App = _interopRequireDefault(require("../../App"));
+
+var _litHtml = require("lit-html");
+
+var _Router = require("../../Router");
+
+var _Auth = _interopRequireDefault(require("../../Auth"));
+
+var _Utils = _interopRequireDefault(require("../../Utils"));
+
+var _UserAPI = _interopRequireDefault(require("../../UserAPI"));
+
+var _Toast = _interopRequireDefault(require("../../Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject4() {
+  const data = _taggedTemplateLiteral(["\n                  <va-user\n                    id=\"", "\"\n                    class=\"service-card\"\n                    firstName=\"", "\"\n                    lastName=\"", "\"\n                    email=\"", "\"\n                    bio=\"", "\"\n                    accessLevel=\"", "\"\n                    avatar=\"", "/images/", "\"\n                  >\n                  </va-user>\n                "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  const data = _taggedTemplateLiteral([" ", ""]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  const data = _taggedTemplateLiteral([" <sl-spinner></sl-spinner> "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Users\"\n        user=\"", "\"\n      ></va-app-header>\n      <div class=\"page-content\">\n        <!-- this will be styled in _base.scss -->\n        <div class=\"services-grid\">\n          ", "\n        </div>\n      </div>\n    "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+class usersView {
+  init() {
+    document.title = "Users"; // this is where the haircuts will be stored when they come in from the backend
+
+    this.users == null;
+    this.render();
+
+    _Utils.default.pageIntroAnim();
+
+    this.getUsers();
+    console.log(this.users);
+  } // apparently it is important to not go straight to the API
+  // function because there are some important preprocessing steps
+  // the API function simply just returns the data
+
+
+  async getUsers() {
+    try {
+      // returns a json object of all out haircuts and store in variable
+      // this takes some time so we need to do this asynchronously
+      this.users = await _UserAPI.default.getUsers();
+      console.log(this.users); // re renders the page now that we have loaded the services in
+
+      this.render();
+    } catch (err) {
+      // the second argument makes the toast display red
+      _Toast.default.show(err, "error");
+    }
+  }
+
+  render() {
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), this.users == null ? (0, _litHtml.html)(_templateObject2()) : // map is basically like a for each
+    // remember using apiBase is like writing http://localhost:3000
+    (0, _litHtml.html)(_templateObject3(), this.users.map(user => (0, _litHtml.html)(_templateObject4(), user._id, user.firstName, user.lastName, user.email, user.bio, user.accessLevel, _App.default.apiBase, user.avatar))));
+    (0, _litHtml.render)(template, _App.default.rootEl);
+  }
+
+}
+
+var _default = new usersView();
+
+exports.default = _default;
+},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../UserAPI":"UserAPI.js","../../Toast":"Toast.js"}],"Router.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14746,6 +14876,8 @@ var _services = _interopRequireDefault(require("./views/pages/services"));
 
 var _myServices = _interopRequireDefault(require("./views/pages/myServices"));
 
+var _users = _interopRequireDefault(require("./views/pages/users"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import views
@@ -14767,7 +14899,8 @@ const routes = {
   "/editProfile": _editProfile.default,
   "/newHaircut": _newHaircut.default,
   "/services": _services.default,
-  "/myServices": _myServices.default
+  "/myServices": _myServices.default,
+  "/users": _users.default
 };
 
 class Router {
@@ -14822,7 +14955,7 @@ function anchorRoute(e) {
   const pathname = e.target.closest("a").pathname;
   AppRouter.gotoRoute(pathname);
 }
-},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/profile":"views/pages/profile.js","./views/pages/editProfile":"views/pages/editProfile.js","./views/pages/guide":"views/pages/guide.js","./views/pages/hairdressers":"views/pages/hairdressers.js","./views/pages/haircuts":"views/pages/haircuts.js","./views/pages/favoriteHaircuts":"views/pages/favoriteHaircuts.js","./views/pages/newHaircut":"views/pages/newHaircut.js","./views/pages/services":"views/pages/services.js","./views/pages/myServices":"views/pages/myServices.js"}],"App.js":[function(require,module,exports) {
+},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/profile":"views/pages/profile.js","./views/pages/editProfile":"views/pages/editProfile.js","./views/pages/guide":"views/pages/guide.js","./views/pages/hairdressers":"views/pages/hairdressers.js","./views/pages/haircuts":"views/pages/haircuts.js","./views/pages/favoriteHaircuts":"views/pages/favoriteHaircuts.js","./views/pages/newHaircut":"views/pages/newHaircut.js","./views/pages/services":"views/pages/services.js","./views/pages/myServices":"views/pages/myServices.js","./views/pages/users":"views/pages/users.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17162,7 +17295,86 @@ customElements.define("va-service-type", class ServiceType extends _litElement.L
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../ServiceAPI":"ServiceAPI.js","../Toast":"Toast.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../ServiceAPI":"ServiceAPI.js","../Toast":"Toast.js"}],"components/va-user.js":[function(require,module,exports) {
+"use strict";
+
+var _litElement = require("@polymer/lit-element");
+
+var _litHtml = require("lit-html");
+
+var _Router = require("../Router");
+
+var _Auth = _interopRequireDefault(require("../Auth"));
+
+var _App = _interopRequireDefault(require("../App"));
+
+var _UserAPI = _interopRequireDefault(require("../UserAPI"));
+
+var _Toast = _interopRequireDefault(require("../Toast"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject() {
+  const data = _taggedTemplateLiteral([" <sl-card>\n        <img slot=\"image\" src=\"", "\" />\n        <h2>", " ", "</h2>\n        <p>", "</p>\n        <p>", "</p>\n        <p>", "</p>\n      </sl-card>"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+// creating a custom web component
+// import this component in index.js
+customElements.define("va-user", class User extends _litElement.LitElement {
+  constructor() {
+    // runs the lit element constructor
+    super();
+  } // defining the html attributes e.g. title="hello"
+  // we can use this to pass in data from the db
+
+
+  static get properties() {
+    return {
+      firstName: {
+        type: String
+      },
+      lastName: {
+        type: String
+      },
+      email: {
+        type: String
+      },
+      password: {
+        type: String
+      },
+      avatar: {
+        type: String
+      },
+      bio: {
+        type: String
+      },
+      accessLevel: {
+        type: Number
+      }
+    };
+  }
+
+  firstUpdated() {
+    super.firstUpdated();
+  } // custom components use the 'shadow DOM' so anything defined in here
+  // does not interfere with the outside document
+  // you can think of it as being locally scoped or isolated from the rest of the project
+
+
+  render() {
+    return (0, _litElement.html)(_templateObject(), this.avatar, this.firstName, this.firstName, this.email, this.bio, this.accessLevel);
+  }
+
+});
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -17247,6 +17459,8 @@ require("./components/va-service");
 
 require("./components/va-service-type");
 
+require("./components/va-user");
+
 require("./scss/master.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -17259,7 +17473,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener("DOMContentLoaded", () => {
   _App.default.init();
 });
-},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./components/va-haircut":"components/va-haircut.js","./components/va-service":"components/va-service.js","./components/va-service-type":"components/va-service-type.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./components/va-haircut":"components/va-haircut.js","./components/va-service":"components/va-service.js","./components/va-service-type":"components/va-service-type.js","./components/va-user":"components/va-user.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

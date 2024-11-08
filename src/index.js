@@ -7,6 +7,7 @@ import "./components/va-app-header";
 import "./components/va-haircut";
 import "./components/va-service";
 import "./components/va-service-type";
+import "./components/va-user";
 
 // styles
 import "./scss/master.scss";
