@@ -4,6 +4,7 @@ import { anchorRoute, gotoRoute } from "../Router";
 import Auth from "../Auth";
 import App from "../App";
 import UserAPI from "../UserAPI";
+import ServiceAPI from "../ServiceAPI";
 import Toast from "../Toast";
 
 // creating a custom web component
@@ -99,9 +100,19 @@ customElements.define(
                 name="user"
                 value="${Auth.currentUser._id}"
               />
+              <input
+                type="hidden"
+                name="serviceType"
+                value="${this.serviceType}"
+              />
+              <input
+                type="hidden"
+                name="image"
+                value="${this.serviceType}.jpg"
+              />
               <div class="input-group">
                 <sl-input
-                  name="start-date"
+                  name="startDate"
                   type="date"
                   placeholder="Date"
                   label="Preferred date: "
@@ -110,7 +121,7 @@ customElements.define(
               </div>
               <div class="input-group">
                 <sl-textarea
-                  name="notes"
+                  name="agentNotes"
                   rows="3"
                   placeholder="notes"
                 ></sl-textarea>
@@ -145,8 +156,9 @@ customElements.define(
       // the rest of the logic will be handled in the HaircutAPI which we have to import
       // to get access to. because it needs to happen async put in a try catch
       try {
-        await HaircutAPI.newHaircut(formData);
-        Toast.show("Haircut added!");
+        console.log(formData);
+        await ServiceAPI.newBooking(formData);
+        Toast.show("Booking added!");
         // remove loading attribute
         submitBtn.removeAttribute("loading");
         // reset form - with a normal html form you can do this in one line

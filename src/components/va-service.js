@@ -90,11 +90,10 @@ customElements.define(
           </div>
           <div class="content">
             <h1>${this.serviceType}</h1>
-            <!-- <p>${this.description}</p> -->
-            <!-- <p class="price">$${this.price}</p>
-            <p class="gender">Gender: <span>${this.gender}</span></p>
-            <p class="length">Length: <span>${this.length}</span></p> -->
-
+            <p>${this.description}</p>
+            <p>${this.startDate}</p>
+            <p>${this.endDate}</p>
+            <p>${this.agentNotes}</p>
             <sl-button @click=${this.addFavHandler.bind(this)}>
               <sl-icon slot="prefix" name="heart-fill"></sl-icon>
               Add to Favourites
@@ -139,6 +138,10 @@ customElements.define(
           <img slot="image" src="${this.image}" />
           <h2>${this.serviceType}</h2>
           <h3>$${this.serviceType}</h3>
+          <p>${this.description}</p>
+          <p>${this.startDate}</p>
+          <p>${this.endDate}</p>
+          <p>${this.agentNotes}</p>
           <!-- this reference to the user obj should work because we have stringified when passing in home.js -->
           <!-- styling happens inside the web component -->
 

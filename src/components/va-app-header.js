@@ -136,6 +136,7 @@ customElements.define(
             color: var(--app-header-txt-color);
             margin-right: 0.5em;
             font-size: var(--app-header-title-font-size);
+            font-family: var(--secondary-font-family);
           }
 
           /* active nav links */
@@ -211,6 +212,7 @@ customElements.define(
                 >`
               : html``}
             <a href="/services" @click="${this.menuClick}">Services</a>
+            <a href="/myServices" @click="${this.menuClick}">My Services</a>
             <a href="/profile" @click="${this.menuClick}">Profile</a>
             <a href="#" @click="${() => Auth.signOut()}">Sign Out</a>
           </nav>

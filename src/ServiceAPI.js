@@ -7,9 +7,9 @@ import Auth from "./Auth";
 import Toast from "./Toast";
 
 class ServiceAPI {
-  async newHaircut(formData) {
+  async newBooking(formData) {
     // send fetch request
-    const response = await fetch(`${App.apiBase}/haircut`, {
+    const response = await fetch(`${App.apiBase}/service`, {
       method: "POST",
       // sending along the JSON web token along with the request
       headers: { Authorization: `Bearer ${localStorage.accessToken}` },
@@ -18,7 +18,7 @@ class ServiceAPI {
 
     // if response not ok
     if (!response.ok) {
-      let message = "Problem adding haircut";
+      let message = "Problem creating booking";
       if (response.status == 400) {
         const err = await response.json();
         message = err.message;

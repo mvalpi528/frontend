@@ -11,6 +11,7 @@ import haircutsView from "./views/pages/haircuts";
 import favoriteHaircutsView from "./views/pages/favoriteHaircuts";
 import newHaircutView from "./views/pages/newHaircut";
 import servicesView from "./views/pages/services";
+import myServicesView from "./views/pages/myServices";
 
 // define routes
 // these are the pages within our SPA
@@ -30,6 +31,7 @@ const routes = {
   "/editProfile": editProfileView,
   "/newHaircut": newHaircutView,
   "/services": servicesView,
+  "/myServices": myServicesView,
 };
 
 class Router {

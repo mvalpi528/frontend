@@ -125,28 +125,13 @@ a {
   }
 }
 
-.haircuts-grid {
-  display: flex;
-  flex-wrap: wrap;
-  .haircut-card {
-    width: calc(33.3% - 1em);
-    margin: 0.5em;
-  }
-}
-
 .services-grid {
   display: flex;
   flex-wrap: wrap;
-  .haircut-card {
+  .service-card {
     width: calc(33.3% - 1em);
     margin: 0.5em;
   }
-}
-
-// haircuts dialog
-.haircut-dialog {
-  // using a sl custom property
-  --width: 70%;
 }
 
 .service-dialog {
