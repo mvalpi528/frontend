@@ -99,37 +99,6 @@ class UserAPI {
     // return data
     return data;
   }
-
-  // manages the interaction between the front and back end for adding a favorite
-  async addFavHaircut(haircutId) {
-    // exit function if haircut id not provided
-    if (!haircutId) return;
-
-    // fetch the json data
-    const response = await fetch(`${App.apiBase}/user/addFavHaircut`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${localStorage.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ haircutId: haircutId }),
-    });
-
-    // if response not ok
-    if (!response.ok) {
-      // console log error
-      const err = await response.json();
-      if (err) console.log(err);
-      // throw error (exit this function)
-      throw new Error("Problem adding haircut to favourites");
-    }
-
-    // convert response payload into json - store as data
-    const data = await response.json();
-
-    // return data
-    return data;
-  }
 }
 
 export default new UserAPI();

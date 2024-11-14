@@ -152,6 +152,11 @@ a {
   --width: 70%;
 }
 
+.title {
+  font-family: var(--secondary-font-family);
+  color: var(--sl-color-primary-500);
+}
+
 @media all and (max-width: 768px) {
   .signinup-box {
     width: 90%;

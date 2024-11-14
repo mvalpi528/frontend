@@ -139,6 +139,11 @@ a {
   --width: 70%;
 }
 
+.title {
+  font-family: var(--secondary-font-family);
+  color: var(--sl-color-primary-500);
+}
+
 // .haircut-dialog::part(body) {
 //   margin-top: -2em;
 // }

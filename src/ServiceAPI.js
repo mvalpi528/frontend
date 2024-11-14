@@ -34,6 +34,36 @@ class ServiceAPI {
     return data;
   }
 
+  async editBooking(formData) {
+    // get id of individual service
+    var serviceId = formData.get("id");
+
+    // send request via fetch to PUT route
+    const response = await fetch(`${App.apiBase}/service/${serviceId}`, {
+      method: "PUT",
+      // sending along the JSON web token along with the request
+      headers: { Authorization: `Bearer ${localStorage.accessToken}` },
+      body: formData,
+    });
+
+    // if response not ok
+    if (!response.ok) {
+      let message = "Problem creating booking";
+      if (response.status == 400) {
+        const err = await response.json();
+        message = err.message;
+      }
+      // throw error (exit this function)
+      throw new Error(message);
+    }
+
+    // convert response payload into json - store as data
+    const data = await response.json();
+
+    // return data - sends back the newly created haircut
+    return data;
+  }
+
   async getServices() {
     // fetch the json data
     const response = await fetch(`${App.apiBase}/service`, {
@@ -52,8 +82,13 @@ class ServiceAPI {
     // convert response payload into json - store as data
     const data = await response.json();
 
+    // only return bookings made by the current user
+    const filteredData = data.filter(
+      (service) => service.user._id === Auth.currentUser._id
+    );
+
     // return data
-    return data;
+    return filteredData;
   }
 
   async getServiceTypes() {

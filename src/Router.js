@@ -6,10 +6,6 @@ import signupView from "./views/pages/signup";
 import profileView from "./views/pages/profile";
 import editProfileView from "./views/pages/editProfile";
 import guideView from "./views/pages/guide";
-import hairdressersView from "./views/pages/hairdressers";
-import haircutsView from "./views/pages/haircuts";
-import favoriteHaircutsView from "./views/pages/favoriteHaircuts";
-import newHaircutView from "./views/pages/newHaircut";
 import servicesView from "./views/pages/services";
 import myServicesView from "./views/pages/myServices";
 import usersView from "./views/pages/users";
@@ -22,15 +18,11 @@ import usersView from "./views/pages/users";
 const routes = {
   "/": homeView,
   "/guide": guideView,
-  "/hairdressers": hairdressersView,
-  "/haircuts": haircutsView,
-  "/favoriteHaircuts": favoriteHaircutsView,
   404: fourOFourView,
   "/signin": signinView,
   "/signup": signupView,
   "/profile": profileView,
   "/editProfile": editProfileView,
-  "/newHaircut": newHaircutView,
   "/services": servicesView,
   "/myServices": myServicesView,
   "/users": usersView,

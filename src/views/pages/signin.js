@@ -33,9 +33,16 @@ class SignInView {
   // the @ is a shorthand for adding an event listener
   render() {
     const template = html`
+      <style>
+        h1 {
+          font-family: "Libre Baskerville", serif;
+          color: #293a4c;
+        }
+      </style>
       <div class="page-content page-centered">
         <div class="signinup-box">
-          <img class="signinup-logo" src="/images/logo.svg" />
+          <h1>Platinum Property</h1>
+          <!-- <img class="signinup-logo" src="/images/logo.svg" /> -->
           <sl-form
             class="form-signup dark-theme"
             @sl-submit=${this.signInSubmitHandler}

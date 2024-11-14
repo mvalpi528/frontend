@@ -26,7 +26,6 @@ class servicesView {
       // returns a json object of all out haircuts and store in variable
       // this takes some time so we need to do this asynchronously
       this.services = await ServiceAPI.getServiceTypes();
-      console.log(this.services);
       // re renders the page now that we have loaded the services in
       this.render();
     } catch (err) {

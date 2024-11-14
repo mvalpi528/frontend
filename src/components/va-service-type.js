@@ -78,17 +78,10 @@ customElements.define(
             <img src="${this.image}" alt="${this.serviceType}" />
           </div>
           <div class="content">
-            <h1>${this.serviceType}</h1>
+            <h1 class="title">${this.serviceType}</h1>
             <p>${this.description}</p>
 
-            <sl-button @click=${this.addFavHandler.bind(this)}>
-              <sl-icon slot="prefix" name="heart-fill"></sl-icon>
-              Add to Favourites
-            </sl-button>
-
             <!-- Booking form -->
-
-            <h1>New Booking</h1>
             <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->
             <sl-form
               class="page-form"
@@ -144,7 +137,6 @@ customElements.define(
       });
     }
 
-    // TODO - convert this from making a new haircut to making a new service booking
     async newBookingSubmitHandler(e) {
       // sl form still behaves like a normal form in that its default
       // behaviour is to refresh the page on submit
@@ -185,26 +177,14 @@ customElements.define(
       }
     }
 
-    // communicates to the backend via the API
-    // async because the UserAPI has to talk to the backend which uses await
-    async addFavHandler() {
-      try {
-        await UserAPI.addFavHaircut(this.id);
-        Toast.show("Haircut added to favourites");
-      } catch (err) {
-        Toast.show(err, "error");
-      }
-    }
-
     // custom components use the 'shadow DOM' so anything defined in here
     // does not interfere with the outside document
     // you can think of it as being locally scoped or isolated from the rest of the project
     render() {
       return html` <style>
-          .author {
-            font-size: 0.9em;
-            font-style: italic;
-            opacity: 0.8;
+          h2 {
+            font-family: "Libre Baskerville", serif;
+            color: #293a4c;
           }
 
           img {
@@ -218,12 +198,12 @@ customElements.define(
         <sl-card>
           <img slot="image" src="${this.image}" />
           <h2>${this.serviceType}</h2>
-          <p>${this.description}</p>
+
           <!-- styling happens inside the web component -->
 
           <!-- event listener being added inline -->
           <sl-button @click=${this.bookServiceHandler.bind(this)}
-            >More Info</sl-button
+            >Book Now</sl-button
           >
         </sl-card>`;
     }

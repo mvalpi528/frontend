@@ -7641,7 +7641,7 @@ class Utils {
   }
 
   pageIntroAnim() {
-    const pageContent = document.querySelector('.page-content');
+    const pageContent = document.querySelector(".page-content");
     if (!pageContent) return;
 
     _gsap.default.fromTo(pageContent, {
@@ -7650,9 +7650,20 @@ class Utils {
     }, {
       opacity: 1,
       y: 0,
-      ease: 'power2.out',
+      ease: "power2.out",
       duration: 0.3
     });
+  } // Helper method to format dates
+
+
+  formatDate(dateString) {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, options); // Uses locale date formatting
   }
 
 }
@@ -7778,7 +7789,7 @@ var _Utils = _interopRequireDefault(require("./../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class=\"page-content page-centered\">\n        <div class=\"signinup-box\">\n          <img class=\"signinup-logo\" src=\"/images/logo.svg\" />\n          <sl-form\n            class=\"form-signup dark-theme\"\n            @sl-submit=", "\n          >\n            <div class=\"input-group\">\n              <sl-input\n                name=\"email\"\n                type=\"email\"\n                placeholder=\"Email\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"password\"\n                type=\"password\"\n                placeholder=\"Password\"\n                required\n                toggle-password\n              ></sl-input>\n            </div>\n            <sl-button\n              class=\"submit-btn\"\n              type=\"primary\"\n              submit\n              style=\"width: 100%;\"\n              >Sign In</sl-button\n            >\n          </sl-form>\n          <p>No Account? <a href=\"/signup\" @click=", ">Sign Up</a></p>\n        </div>\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n      <style>\n        h1 {\n          font-family: \"Libre Baskerville\", serif;\n          color: #293a4c;\n        }\n      </style>\n      <div class=\"page-content page-centered\">\n        <div class=\"signinup-box\">\n          <h1>Platinum Property</h1>\n          <!-- <img class=\"signinup-logo\" src=\"/images/logo.svg\" /> -->\n          <sl-form\n            class=\"form-signup dark-theme\"\n            @sl-submit=", "\n          >\n            <div class=\"input-group\">\n              <sl-input\n                name=\"email\"\n                type=\"email\"\n                placeholder=\"Email\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"password\"\n                type=\"password\"\n                placeholder=\"Password\"\n                required\n                toggle-password\n              ></sl-input>\n            </div>\n            <sl-button\n              class=\"submit-btn\"\n              type=\"primary\"\n              submit\n              style=\"width: 100%;\"\n              >Sign In</sl-button\n            >\n          </sl-form>\n          <p>No Account? <a href=\"/signup\" @click=", ">Sign Up</a></p>\n        </div>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13760,36 +13771,6 @@ class UserAPI {
     const data = await response.json(); // return data
 
     return data;
-  } // manages the interaction between the front and back end for adding a favorite
-
-
-  async addFavHaircut(haircutId) {
-    // exit function if haircut id not provided
-    if (!haircutId) return; // fetch the json data
-
-    const response = await fetch("".concat(_App.default.apiBase, "/user/addFavHaircut"), {
-      method: "PUT",
-      headers: {
-        Authorization: "Bearer ".concat(localStorage.accessToken),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        haircutId: haircutId
-      })
-    }); // if response not ok
-
-    if (!response.ok) {
-      // console log error
-      const err = await response.json();
-      if (err) console.log(err); // throw error (exit this function)
-
-      throw new Error("Problem adding haircut to favourites");
-    } // convert response payload into json - store as data
-
-
-    const data = await response.json(); // return data
-
-    return data;
   }
 
 }
@@ -13992,433 +13973,7 @@ class GuideView {
 var _default = new GuideView();
 
 exports.default = _default;
-},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../UserAPI":"UserAPI.js"}],"views/pages/hairdressers.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("../../App"));
-
-var _litHtml = require("lit-html");
-
-var _Router = require("../../Router");
-
-var _Auth = _interopRequireDefault(require("../../Auth"));
-
-var _Utils = _interopRequireDefault(require("../../Utils"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Hairdressers\"\n        user=\"", "\"\n      ></va-app-header>\n      <div class=\"page-content\">\n        <h1>Hairdressers</h1>\n        <p>Page content ...</p>\n      </div>\n    "]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-class HairdessersView {
-  init() {
-    document.title = "Hairdressers";
-    this.render();
-
-    _Utils.default.pageIntroAnim();
-  }
-
-  render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser));
-    (0, _litHtml.render)(template, _App.default.rootEl);
-  }
-
-}
-
-var _default = new HairdessersView();
-
-exports.default = _default;
-},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js"}],"HaircutAPI.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("./App"));
-
-var _Auth = _interopRequireDefault(require("./Auth"));
-
-var _Toast = _interopRequireDefault(require("./Toast"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// The purpose for creating this API file is to prevent the duplication of
-// the same logic to communicate with the backend duplicated across
-// multiple views
-class HaircutAPI {
-  async newHaircut(formData) {
-    // send fetch request
-    const response = await fetch("".concat(_App.default.apiBase, "/haircut"), {
-      method: "POST",
-      // sending along the JSON web token along with the request
-      headers: {
-        Authorization: "Bearer ".concat(localStorage.accessToken)
-      },
-      body: formData
-    }); // if response not ok
-
-    if (!response.ok) {
-      let message = "Problem adding haircut";
-
-      if (response.status == 400) {
-        const err = await response.json();
-        message = err.message;
-      } // throw error (exit this function)
-
-
-      throw new Error(message);
-    } // convert response payload into json - store as data
-
-
-    const data = await response.json(); // return data - sends back the newly created haircut
-
-    return data;
-  }
-
-  async getHaircuts() {
-    // fetch the json data
-    const response = await fetch("".concat(_App.default.apiBase, "/haircut"), {
-      headers: {
-        Authorization: "Bearer ".concat(localStorage.accessToken)
-      }
-    }); // if response not ok
-
-    if (!response.ok) {
-      // console log error
-      const err = await response.json();
-      if (err) console.log(err); // throw error (exit this function)
-
-      throw new Error("Problem getting haircuts");
-    } // convert response payload into json - store as data
-
-
-    const data = await response.json(); // return data
-
-    return data;
-  }
-
-}
-
-var _default = new HaircutAPI();
-
-exports.default = _default;
-},{"./App":"App.js","./Auth":"Auth.js","./Toast":"Toast.js"}],"views/pages/haircuts.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("../../App"));
-
-var _litHtml = require("lit-html");
-
-var _Router = require("../../Router");
-
-var _Auth = _interopRequireDefault(require("../../Auth"));
-
-var _Utils = _interopRequireDefault(require("../../Utils"));
-
-var _HaircutAPI = _interopRequireDefault(require("../../HaircutAPI"));
-
-var _Toast = _interopRequireDefault(require("../../Toast"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n                  <va-haircut\n                    id=\"", "\"\n                    class=\"haircut-card\"\n                    name=\"", "\"\n                    description=\"", "\"\n                    price=\"", "\"\n                    user=\"", "\"\n                    image=\"", "/images/", "\"\n                    gender=\"", "\"\n                    length=\"", "\"\n                  >\n                  </va-haircut>\n                "]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  const data = _taggedTemplateLiteral([" ", ""]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <sl-spinner></sl-spinner> "]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Haircuts\"\n        user=\"", "\"\n      ></va-app-header>\n      <div class=\"page-content\">\n        <!-- this will be styled in _base.scss -->\n        <div class=\"haircuts-grid\">\n          ", "\n        </div>\n      </div>\n    "]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-class HaircutsView {
-  init() {
-    document.title = "Haircuts"; // this is where the haircuts will be stored when they come in from the backend
-
-    this.haircuts = null;
-    this.render();
-
-    _Utils.default.pageIntroAnim(); // calls the getHaircuts method on page load
-
-
-    this.getHaircuts();
-  } // apparently it is important to not go straight to the API
-  // function because there are some important preprocessing steps
-  // the API function simply just returns the data
-
-
-  async getHaircuts() {
-    try {
-      // returns a json object of all out haircuts and store in variable
-      // this takes some time so we need to do this asynchronously
-      this.haircuts = await _HaircutAPI.default.getHaircuts();
-      console.log(this.haircuts); // re renders the page now that we have loaded the haircuts in
-
-      this.render();
-    } catch (err) {
-      // the second argument makes the toast display red
-      _Toast.default.show(err, "error");
-    }
-  }
-
-  render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), this.haircuts == null ? (0, _litHtml.html)(_templateObject2()) : // map is basically like a for each
-    // remember using apiBase is like writing http://localhost:3000
-    (0, _litHtml.html)(_templateObject3(), this.haircuts.map(haircut => (0, _litHtml.html)(_templateObject4(), haircut._id, haircut.name, haircut.description, haircut.price, JSON.stringify(haircut.user), _App.default.apiBase, haircut.image, haircut.gender, haircut.length))));
-    (0, _litHtml.render)(template, _App.default.rootEl);
-  }
-
-}
-
-var _default = new HaircutsView();
-
-exports.default = _default;
-},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../HaircutAPI":"HaircutAPI.js","../../Toast":"Toast.js"}],"views/pages/favoriteHaircuts.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("../../App"));
-
-var _litHtml = require("lit-html");
-
-var _Router = require("../../Router");
-
-var _Auth = _interopRequireDefault(require("../../Auth"));
-
-var _Utils = _interopRequireDefault(require("../../Utils"));
-
-var _Toast = _interopRequireDefault(require("../../Toast"));
-
-var _UserAPI = _interopRequireDefault(require("../../UserAPI"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _templateObject4() {
-  const data = _taggedTemplateLiteral(["\n                    <va-haircut\n                      class=\"haircut-card\"\n                      id=\"", "\"\n                      name=\"", "\"\n                      description=\"", "\"\n                      price=\"", "\"\n                      user=\"", "\"\n                      image=\"", "/images/", "\"\n                      gender=\"", "\"\n                      length=\"", "\"\n                    >\n                    </va-haircut>\n                  "]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  const data = _taggedTemplateLiteral(["\n                ", "\n              "]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <sl-spinner></sl-spinner> "]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=Favorite Haircuts\"\n        user=\"", "\"\n      ></va-app-header>\n      <div class=\"page-content\">\n        <h1>Page title</h1>\n        <div class=\"haircuts-grid\">\n        ", "\n        </div>\n      </div>\n    "]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-class FavoriteHaircutsView {
-  init() {
-    document.title = "Favorite Haircuts";
-    this.favHaircuts = null;
-    this.render();
-
-    _Utils.default.pageIntroAnim();
-
-    this.getFavHaircuts();
-  } // this has to be called from within the init function
-
-
-  async getFavHaircuts() {
-    try {
-      // the user contains the favourite haircuts
-      const currentUser = await _UserAPI.default.getUser(_Auth.default.currentUser._id);
-      this.favHaircuts = currentUser.favouriteHaircuts;
-      console.log(this.favHaircuts);
-      this.render();
-    } catch (err) {
-      _Toast.default.show(err, "error");
-    }
-  }
-
-  render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), this.favHaircuts == null ? (0, _litHtml.html)(_templateObject2()) : (0, _litHtml.html)(_templateObject3(), this.favHaircuts.map(haircut => (0, _litHtml.html)(_templateObject4(), haircut._id, haircut.name, haircut.description, haircut.price, JSON.stringify(haircut.user), _App.default.apiBase, haircut.image, haircut.gender, haircut.length))));
-    (0, _litHtml.render)(template, _App.default.rootEl);
-  }
-
-}
-
-var _default = new FavoriteHaircutsView();
-
-exports.default = _default;
-},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../Toast":"Toast.js","../../UserAPI":"UserAPI.js"}],"views/pages/newHaircut.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _App = _interopRequireDefault(require("../../App"));
-
-var _litHtml = require("lit-html");
-
-var _Router = require("../../Router");
-
-var _Auth = _interopRequireDefault(require("../../Auth"));
-
-var _Utils = _interopRequireDefault(require("../../Utils"));
-
-var _HaircutAPI = _interopRequireDefault(require("../../HaircutAPI"));
-
-var _Toast = _interopRequireDefault(require("../../Toast"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"New Haircut\"\n        user=\"", "\"\n      ></va-app-header>\n      <div class=\"page-content\">\n        <h1>New Haircut</h1>\n        <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n        <sl-form class=\"page-form\" @sl-submit=", ">\n          <!-- user is submitted in hidden field -->\n          <input type=\"hidden\" name=\"user\" value=\"", "\" />\n          <div class=\"input-group\">\n            <sl-input\n              name=\"name\"\n              type=\"text\"\n              placeholder=\"Haircut Name\"\n              required\n            ></sl-input>\n          </div>\n          <div class=\"input-group\">\n            <sl-input name=\"price\" type=\"text\" placeholder=\"Price\" required>\n              <span slot=\"prefix\">$</span>\n            </sl-input>\n          </div>\n          <div class=\"input-group\">\n            <sl-textarea\n              name=\"description\"\n              rows=\"3\"\n              placeholder=\"Description\"\n            ></sl-textarea>\n          </div>\n          <div class=\"input-group\" style=\"margin-bottom: 2em;\">\n            <label>Image</label><br />\n            <input type=\"file\" name=\"image\" />\n          </div>\n          <div class=\"input-group\" style=\"margin-bottom: 2em;\">\n            <label>Gender</label><br />\n            <sl-radio-group label=\"Select gender\" no-fieldset>\n              <sl-radio name=\"gender\" value=\"m\">Male</sl-radio>\n              <sl-radio name=\"gender\" value=\"f\">Female</sl-radio>\n              <sl-radio name=\"gender\" value=\"u\">Unisex</sl-radio>\n            </sl-radio-group>\n          </div>\n          <div class=\"input-group\" style=\"margin-bottom: 2em;\">\n            <label>Length</label><br />\n            <sl-radio-group label=\"Select length\" no-fieldset>\n              <sl-radio name=\"length\" value=\"s\">Short</sl-radio>\n              <sl-radio name=\"length\" value=\"m\">Medium</sl-radio>\n              <sl-radio name=\"length\" value=\"l\">Long</sl-radio>\n            </sl-radio-group>\n          </div>\n          <sl-button type=\"primary\" class=\"submit-btn\" submit\n            >Add Haircut</sl-button\n          >\n        </sl-form>\n      </div>\n    "]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-class newHaircutView {
-  init() {
-    document.title = "Template";
-    this.render();
-
-    _Utils.default.pageIntroAnim();
-  }
-
-  async newHaircutSubmitHandler(e) {
-    // sl form still behaves like a normal form in that its default
-    // behaviour is to refresh the page on submit
-    e.preventDefault(); // Send form data to HaircutAPI.newHaircut() to pass on to the db
-
-    const submitBtn = document.querySelector(".submit-btn");
-    submitBtn.setAttribute("loading", "");
-    const formData = e.detail.formData; // the rest of the logic will be handled in the HaircutAPI which we have to import
-    // to get access to. because it needs to happen async put in a try catch
-
-    try {
-      await _HaircutAPI.default.newHaircut(formData);
-
-      _Toast.default.show("Haircut added!"); // remove loading attribute
-
-
-      submitBtn.removeAttribute("loading"); // reset form - with a normal html form you can do this in one line
-      // because this is a custom form we have to do everything manually
-      // reset text inputs
-
-      const textInputs = document.querySelectorAll("sl-input");
-      if (textInputs) textInputs.forEach(textInput => textInput.value = null); // reset textarea input
-
-      const textAreaInput = document.querySelector("sl-textarea");
-      textAreaInput.value = ""; // reset radio inputs
-
-      const radioInputs = document.querySelectorAll("sl-radio");
-      if (radioInputs) radioInputs.forEach(radioInput => radioInput.removeAttribute("checked")); // reset file input
-
-      const fileInput = document.querySelector("input[type=file]");
-      if (fileInput) fileInput.value = null;
-    } catch (err) {
-      _Toast.default.show(err, "error");
-
-      submitBtn.removeAttribute("loading");
-    }
-  }
-
-  render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), this.newHaircutSubmitHandler, _Auth.default.currentUser._id);
-    (0, _litHtml.render)(template, _App.default.rootEl);
-  }
-
-}
-
-var _default = new newHaircutView();
-
-exports.default = _default;
-},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../HaircutAPI":"HaircutAPI.js","../../Toast":"Toast.js"}],"ServiceAPI.js":[function(require,module,exports) {
+},{"../../App":"App.js","lit-html":"../node_modules/lit-html/lit-html.js","../../Router":"Router.js","../../Auth":"Auth.js","../../Utils":"Utils.js","../../UserAPI":"UserAPI.js"}],"ServiceAPI.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14467,6 +14022,37 @@ class ServiceAPI {
     return data;
   }
 
+  async editBooking(formData) {
+    // get id of individual service
+    var serviceId = formData.get("id"); // send request via fetch to PUT route
+
+    const response = await fetch("".concat(_App.default.apiBase, "/service/").concat(serviceId), {
+      method: "PUT",
+      // sending along the JSON web token along with the request
+      headers: {
+        Authorization: "Bearer ".concat(localStorage.accessToken)
+      },
+      body: formData
+    }); // if response not ok
+
+    if (!response.ok) {
+      let message = "Problem creating booking";
+
+      if (response.status == 400) {
+        const err = await response.json();
+        message = err.message;
+      } // throw error (exit this function)
+
+
+      throw new Error(message);
+    } // convert response payload into json - store as data
+
+
+    const data = await response.json(); // return data - sends back the newly created haircut
+
+    return data;
+  }
+
   async getServices() {
     // fetch the json data
     const response = await fetch("".concat(_App.default.apiBase, "/service"), {
@@ -14484,9 +14070,11 @@ class ServiceAPI {
     } // convert response payload into json - store as data
 
 
-    const data = await response.json(); // return data
+    const data = await response.json(); // only return bookings made by the current user
 
-    return data;
+    const filteredData = data.filter(service => service.user._id === _Auth.default.currentUser._id); // return data
+
+    return filteredData;
   }
 
   async getServiceTypes() {
@@ -14602,8 +14190,7 @@ class servicesView {
     try {
       // returns a json object of all out haircuts and store in variable
       // this takes some time so we need to do this asynchronously
-      this.services = await _ServiceAPI.default.getServiceTypes();
-      console.log(this.services); // re renders the page now that we have loaded the services in
+      this.services = await _ServiceAPI.default.getServiceTypes(); // re renders the page now that we have loaded the services in
 
       this.render();
     } catch (err) {
@@ -14864,14 +14451,6 @@ var _editProfile = _interopRequireDefault(require("./views/pages/editProfile"));
 
 var _guide = _interopRequireDefault(require("./views/pages/guide"));
 
-var _hairdressers = _interopRequireDefault(require("./views/pages/hairdressers"));
-
-var _haircuts = _interopRequireDefault(require("./views/pages/haircuts"));
-
-var _favoriteHaircuts = _interopRequireDefault(require("./views/pages/favoriteHaircuts"));
-
-var _newHaircut = _interopRequireDefault(require("./views/pages/newHaircut"));
-
 var _services = _interopRequireDefault(require("./views/pages/services"));
 
 var _myServices = _interopRequireDefault(require("./views/pages/myServices"));
@@ -14889,15 +14468,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const routes = {
   "/": _home.default,
   "/guide": _guide.default,
-  "/hairdressers": _hairdressers.default,
-  "/haircuts": _haircuts.default,
-  "/favoriteHaircuts": _favoriteHaircuts.default,
   404: _.default,
   "/signin": _signin.default,
   "/signup": _signup.default,
   "/profile": _profile.default,
   "/editProfile": _editProfile.default,
-  "/newHaircut": _newHaircut.default,
   "/services": _services.default,
   "/myServices": _myServices.default,
   "/users": _users.default
@@ -14955,7 +14530,7 @@ function anchorRoute(e) {
   const pathname = e.target.closest("a").pathname;
   AppRouter.gotoRoute(pathname);
 }
-},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/profile":"views/pages/profile.js","./views/pages/editProfile":"views/pages/editProfile.js","./views/pages/guide":"views/pages/guide.js","./views/pages/hairdressers":"views/pages/hairdressers.js","./views/pages/haircuts":"views/pages/haircuts.js","./views/pages/favoriteHaircuts":"views/pages/favoriteHaircuts.js","./views/pages/newHaircut":"views/pages/newHaircut.js","./views/pages/services":"views/pages/services.js","./views/pages/myServices":"views/pages/myServices.js","./views/pages/users":"views/pages/users.js"}],"App.js":[function(require,module,exports) {
+},{"./views/pages/home":"views/pages/home.js","./views/pages/404":"views/pages/404.js","./views/pages/signin":"views/pages/signin.js","./views/pages/signup":"views/pages/signup.js","./views/pages/profile":"views/pages/profile.js","./views/pages/editProfile":"views/pages/editProfile.js","./views/pages/guide":"views/pages/guide.js","./views/pages/services":"views/pages/services.js","./views/pages/myServices":"views/pages/myServices.js","./views/pages/users":"views/pages/users.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16818,7 +16393,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n        <style>\n          * {\n            box-sizing: border-box;\n          }\n          .app-header {\n            background: var(--brand-color);\n            position: fixed;\n            top: 0;\n            right: 0;\n            left: 0;\n            height: var(--app-header-height);\n            color: #fff;\n            display: flex;\n            z-index: 9;\n            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);\n            align-items: center;\n          }\n\n          .app-header-main {\n            flex-grow: 1;\n            display: flex;\n            align-items: center;\n          }\n\n          .app-header-main::slotted(h1) {\n            color: #fff;\n          }\n\n          .app-logo a {\n            color: #fff;\n            text-decoration: none;\n            font-weight: bold;\n            font-size: 1.2em;\n            padding: 0.6em;\n            display: inline-block;\n          }\n\n          .app-logo img {\n            width: 90px;\n          }\n\n          .hamburger-btn::part(base) {\n            color: #fff;\n          }\n\n          .app-top-nav {\n            display: flex;\n            height: 100%;\n            align-items: center;\n          }\n\n          .app-top-nav a {\n            display: inline-block;\n            padding: 0.8em;\n            text-decoration: none;\n            color: #fff;\n          }\n\n          .app-side-menu-items a {\n            display: block;\n            padding: 0.5em;\n            text-decoration: none;\n            font-size: 1.3em;\n            color: #333;\n          }\n\n          .app-side-menu-logo {\n            width: 120px;\n            margin-bottom: 1em;\n            position: absolute;\n            top: 2em;\n            left: 1.5em;\n          }\n\n          .page-title {\n            color: var(--app-header-txt-color);\n            margin-right: 0.5em;\n            font-size: var(--app-header-title-font-size);\n            font-family: var(--secondary-font-family);\n          }\n\n          /* active nav links */\n          .app-top-nav a.active,\n          .app-side-menu-items a.active {\n            font-weight: bold;\n          }\n\n          /* RESPONSIVE - MOBILE ------------------- */\n          @media all and (max-width: 768px) {\n            .app-top-nav {\n              display: none;\n            }\n          }\n        </style>\n\n        <header class=\"app-header\">\n          <sl-icon-button\n            class=\"hamburger-btn\"\n            name=\"list\"\n            @click=\"", "\"\n            style=\"font-size: 1.5em;\"\n          ></sl-icon-button>\n\n          <div class=\"app-header-main\">\n            ", "\n            <slot></slot>\n          </div>\n\n          <nav class=\"app-top-nav\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n\n            <!-- can access a user becuase they are passed into components as a property -->\n            ", "\n            <sl-dropdown>\n              <a slot=\"trigger\" href=\"#\" @click=\"", "\">\n                <sl-avatar\n                  style=\"--size: 24px;\"\n                  image=", "\n                ></sl-avatar>\n                ", "\n              </a>\n              <sl-menu>\n                <sl-menu-item @click=\"", "\"\n                  >Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Edit Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Sign Out</sl-menu-item\n                >\n              </sl-menu>\n            </sl-dropdown>\n          </nav>\n        </header>\n\n        <sl-drawer class=\"app-side-menu\" placement=\"left\">\n          <img class=\"app-side-menu-logo\" src=\"/images/logo.svg\" />\n          <nav class=\"app-side-menu-items\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n            ", "\n            <a href=\"/services\" @click=\"", "\">Services</a>\n            <a href=\"/myServices\" @click=\"", "\">My Services</a>\n            <a href=\"/profile\" @click=\"", "\">Profile</a>\n            <a href=\"#\" @click=\"", "\">Sign Out</a>\n          </nav>\n        </sl-drawer>\n      "]);
+  const data = _taggedTemplateLiteral(["\n        <style>\n          * {\n            box-sizing: border-box;\n          }\n          .app-header {\n            background: var(--brand-color);\n            position: fixed;\n            top: 0;\n            right: 0;\n            left: 0;\n            height: var(--app-header-height);\n            color: #fff;\n            display: flex;\n            z-index: 9;\n            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);\n            align-items: center;\n          }\n\n          .app-header-main {\n            flex-grow: 1;\n            display: flex;\n            align-items: center;\n          }\n\n          .app-header-main::slotted(h1) {\n            color: #fff;\n          }\n\n          .app-logo a {\n            color: #fff;\n            text-decoration: none;\n            font-weight: bold;\n            font-size: 1.2em;\n            padding: 0.6em;\n            display: inline-block;\n          }\n\n          .app-logo img {\n            width: 90px;\n          }\n\n          .hamburger-btn::part(base) {\n            color: #fff;\n          }\n\n          .app-top-nav {\n            display: flex;\n            height: 100%;\n            align-items: center;\n          }\n\n          .app-top-nav a {\n            display: inline-block;\n            padding: 0.8em;\n            text-decoration: none;\n            color: #fff;\n          }\n\n          .app-side-menu-items a {\n            display: block;\n            padding: 0.5em;\n            text-decoration: none;\n            font-size: 1.3em;\n            color: #333;\n          }\n\n          .app-side-menu-logo {\n            width: 120px;\n            margin-bottom: 1em;\n            position: absolute;\n            top: 2em;\n            left: 1.5em;\n          }\n\n          .page-title {\n            color: var(--app-header-txt-color);\n            margin-right: 0.5em;\n            font-size: var(--app-header-title-font-size);\n            font-family: var(--secondary-font-family);\n          }\n\n          /* active nav links */\n          .app-top-nav a.active,\n          .app-side-menu-items a.active {\n            font-weight: bold;\n          }\n\n          /* RESPONSIVE - MOBILE ------------------- */\n          @media all and (max-width: 768px) {\n            .app-top-nav {\n              display: none;\n            }\n          }\n        </style>\n\n        <header class=\"app-header\">\n          <sl-icon-button\n            class=\"hamburger-btn\"\n            name=\"list\"\n            @click=\"", "\"\n            style=\"font-size: 1.5em;\"\n          ></sl-icon-button>\n\n          <div class=\"app-header-main\">\n            ", "\n            <slot></slot>\n          </div>\n\n          <nav class=\"app-top-nav\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n\n            <!-- can access a user becuase they are passed into components as a property -->\n            ", "\n            <sl-dropdown>\n              <a slot=\"trigger\" href=\"#\" @click=\"", "\">\n                <sl-avatar\n                  style=\"--size: 24px;\"\n                  image=", "\n                ></sl-avatar>\n                ", "\n              </a>\n              <sl-menu>\n                <sl-menu-item @click=\"", "\"\n                  >Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Edit Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Sign Out</sl-menu-item\n                >\n              </sl-menu>\n            </sl-dropdown>\n          </nav>\n        </header>\n\n        <sl-drawer class=\"app-side-menu\" placement=\"left\">\n          <img class=\"app-side-menu-logo\" src=\"/images/logo.svg\" />\n          <nav class=\"app-side-menu-items\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n            ", "\n            <a href=\"/services\" @click=\"", "\">Book a service</a>\n            <a href=\"/myServices\" @click=\"", "\">My Services</a>\n            <a href=\"/profile\" @click=\"", "\">Profile</a>\n            <a href=\"#\" @click=\"", "\">Sign Out</a>\n          </nav>\n        </sl-drawer>\n      "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16884,134 +16459,7 @@ customElements.define("va-app-header", class AppHeader extends _litElement.LitEl
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js"}],"components/va-haircut.js":[function(require,module,exports) {
-"use strict";
-
-var _litElement = require("@polymer/lit-element");
-
-var _litHtml = require("lit-html");
-
-var _Router = require("./../Router");
-
-var _Auth = _interopRequireDefault(require("./../Auth"));
-
-var _App = _interopRequireDefault(require("./../App"));
-
-var _UserAPI = _interopRequireDefault(require("../UserAPI"));
-
-var _Toast = _interopRequireDefault(require("../Toast"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <style>\n          .author {\n            font-size: 0.9em;\n            font-style: italic;\n            opacity: 0.8;\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <h3>$", "</h3>\n          <!-- this reference to the user obj should work because we have stringified when passing in home.js -->\n          <!-- styling happens inside the web component -->\n          <p class=\"author\">By ", " ", "</p>\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >More Info</sl-button\n          >\n          <!-- shoelace has a number of different icons to use in the button -->\n          <!-- the .bind is so that the favHandler method this keyword refers to the class not the button that clicked -->\n          <sl-icon-button\n            name=\"heart-fill\"\n            label=\"Add to favorites\"\n            @click=", "\n          ></sl-icon-button>\n        </sl-card>"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1>", "</h1>\n            <p>", "</p>\n            <p class=\"price\">$", "</p>\n            <p class=\"gender\">Gender: <span>", "</span></p>\n            <p class=\"length\">Length: <span>", "</span></p>\n\n            <sl-button @click=", ">\n              <sl-icon slot=\"prefix\" name=\"heart-fill\"></sl-icon>\n              Add to Favourites\n            </sl-button>\n          </div>\n        </div>"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-// creating a custom web component
-// import this component in index.js
-customElements.define("va-haircut", class Haircut extends _litElement.LitElement {
-  constructor() {
-    // runs the lit element constructor
-    super();
-  } // defining the html attributes e.g. title="hello"
-  // we can use this to pass in data from the db
-
-
-  static get properties() {
-    return {
-      id: {
-        type: String
-      },
-      name: {
-        type: String
-      },
-      description: {
-        type: String
-      },
-      price: {
-        type: String
-      },
-      user: {
-        type: Object
-      },
-      image: {
-        type: String
-      },
-      gender: {
-        type: String
-      },
-      length: {
-        type: String
-      }
-    };
-  }
-
-  firstUpdated() {
-    super.firstUpdated();
-  } // because this function has been called by an event listener on a button
-  // it thinks that the 'this' keyword refers to 'this button' which is why we added .bind(this)
-
-
-  moreInfoHandler() {
-    // dialogs need to be added to the bottom of a html page so you should create it inside this method
-    const dialogEl = document.createElement("sl-dialog");
-    dialogEl.noHeader = true; // add class name so we can style it later on
-
-    dialogEl.className = "haircut-dialog"; // add some content to the dialog
-    // style the dialog itself in _base.scss
-
-    const dialogContent = (0, _litElement.html)(_templateObject(), this.image, this.name, this.name, this.description, this.price, this.gender, this.length, this.addFavHandler.bind(this));
-    (0, _litHtml.render)(dialogContent, dialogEl); // append to document.body - remember that this needs to occur at the bottom of the document
-
-    document.body.append(dialogEl); // show sl-dialog
-
-    dialogEl.show(); // by default, dialog elements are not deleted from the DOM on hide
-    // we need to specify that the dialog should be deleted on hide
-
-    dialogEl.addEventListener("sl-after-hide", () => {
-      dialogEl.remove();
-    });
-  } // communicates to the backend via the API
-  // async because the UserAPI has to talk to the backend which uses await
-
-
-  async addFavHandler() {
-    try {
-      await _UserAPI.default.addFavHaircut(this.id);
-
-      _Toast.default.show("Haircut added to favourites");
-    } catch (err) {
-      _Toast.default.show(err, "error");
-    }
-  } // custom components use the 'shadow DOM' so anything defined in here
-  // does not interfere with the outside document
-  // you can think of it as being locally scoped or isolated from the rest of the project
-
-
-  render() {
-    return (0, _litElement.html)(_templateObject2(), this.image, this.name, this.price, this.user.firstName, this.user.lastName, this.moreInfoHandler.bind(this), this.addFavHandler.bind(this));
-  }
-
-});
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js"}],"components/va-service.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","./../Router":"Router.js","./../Auth":"Auth.js","./../App":"App.js"}],"components/va-service.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("@polymer/lit-element");
@@ -17028,10 +16476,16 @@ var _UserAPI = _interopRequireDefault(require("../UserAPI"));
 
 var _Toast = _interopRequireDefault(require("../Toast"));
 
+var _Utils = _interopRequireDefault(require("../Utils"));
+
+var _ServiceAPI = _interopRequireDefault(require("../ServiceAPI"));
+
+var _services = _interopRequireDefault(require("../views/pages/services"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <style>\n          .author {\n            font-size: 0.9em;\n            font-style: italic;\n            opacity: 0.8;\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <h3>$", "</h3>\n          <p>", "</p>\n          <p>", "</p>\n          <p>", "</p>\n          <p>", "</p>\n          <!-- this reference to the user obj should work because we have stringified when passing in home.js -->\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >More Info</sl-button\n          >\n          <!-- shoelace has a number of different icons to use in the button -->\n          <!-- the .bind is so that the favHandler method this keyword refers to the class not the button that clicked -->\n          <sl-icon-button\n            name=\"heart-fill\"\n            label=\"Add to favorites\"\n            @click=", "\n          ></sl-icon-button>\n        </sl-card>"]);
+  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <p>", "</p>\n          <p><b>Booking start date: </b>", "</p>\n          <p><b>Service completed: </b>", "</p>\n          <p><b>Agent notes: </b>", "</p>\n          <!-- this reference to the user obj should work because we have stringified when passing in home.js -->\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Edit booking</sl-button\n          >\n        </sl-card>"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -17041,7 +16495,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1>", "</h1>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p>\n            <sl-button @click=", ">\n              <sl-icon slot=\"prefix\" name=\"heart-fill\"></sl-icon>\n              Add to Favourites\n            </sl-button>\n          </div>\n        </div>"]);
+  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <!-- <h1>", "</h1>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p> -->\n\n            <h1 class=\"title\">Edit Booking</h1>\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n\n            <h3 class=\"title\">Current booking details</h3>\n\n            <p>Service Type: ", "</p>\n            <p>Description: ", "</p>\n            <p>Start Date: ", "</p>\n            <p>Service Completed: ", "</p>\n            <p>Agent Notes: ", "</p>\n\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input type=\"hidden\" name=\"id\" value=\"", "\" />\n\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  value=\"\"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                  value=\"", "\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Edit Booking</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -17105,7 +16559,7 @@ customElements.define("va-service", class Service extends _litElement.LitElement
     dialogEl.className = "service-dialog"; // add some content to the dialog
     // style the dialog itself in _base.scss
 
-    const dialogContent = (0, _litElement.html)(_templateObject(), this.image, this.serviceType, this.serviceType, this.description, this.startDate, this.endDate, this.agentNotes, this.addFavHandler.bind(this));
+    const dialogContent = (0, _litElement.html)(_templateObject(), this.image, this.serviceType, this.serviceType, this.description, this.startDate, this.endDate, this.agentNotes, this.serviceType, this.description, _Utils.default.formatDate(this.startDate), _Utils.default.formatDate(this.endDate), this.agentNotes, this.editBookingSubmitHandler, _Auth.default.currentUser._id, this.id, this.serviceType, this.serviceType, this.agentNotes);
     (0, _litHtml.render)(dialogContent, dialogEl); // append to document.body - remember that this needs to occur at the bottom of the document
 
     document.body.append(dialogEl); // show sl-dialog
@@ -17116,17 +16570,43 @@ customElements.define("va-service", class Service extends _litElement.LitElement
     dialogEl.addEventListener("sl-after-hide", () => {
       dialogEl.remove();
     });
-  } // communicates to the backend via the API
-  // async because the UserAPI has to talk to the backend which uses await
+  }
 
+  async editBookingSubmitHandler(e) {
+    // sl form still behaves like a normal form in that its default
+    // behaviour is to refresh the page on submit
+    e.preventDefault(); // Send form data to HaircutAPI.newHaircut() to pass on to the db
 
-  async addFavHandler() {
+    const submitBtn = document.querySelector(".submit-btn");
+    submitBtn.setAttribute("loading", "");
+    const formData = e.detail.formData; // the rest of the logic will be handled in the HaircutAPI which we have to import
+    // to get access to. because it needs to happen async put in a try catch
+
     try {
-      await _UserAPI.default.addFavHaircut(this.id);
+      await _ServiceAPI.default.editBooking(formData);
 
-      _Toast.default.show("Haircut added to favourites");
+      _Toast.default.show("Booking updated!"); // remove loading attribute
+
+
+      submitBtn.removeAttribute("loading"); // reset form - with a normal html form you can do this in one line
+      // because this is a custom form we have to do everything manually
+      // reset text inputs
+
+      const textInputs = document.querySelectorAll("sl-input");
+      if (textInputs) textInputs.forEach(textInput => textInput.value = null); // reset textarea input
+
+      const textAreaInput = document.querySelector("sl-textarea");
+      textAreaInput.value = ""; // reset radio inputs
+
+      const radioInputs = document.querySelectorAll("sl-radio");
+      if (radioInputs) radioInputs.forEach(radioInput => radioInput.removeAttribute("checked")); // reset file input
+
+      const fileInput = document.querySelector("input[type=file]");
+      if (fileInput) fileInput.value = null;
     } catch (err) {
       _Toast.default.show(err, "error");
+
+      submitBtn.removeAttribute("loading");
     }
   } // custom components use the 'shadow DOM' so anything defined in here
   // does not interfere with the outside document
@@ -17134,11 +16614,11 @@ customElements.define("va-service", class Service extends _litElement.LitElement
 
 
   render() {
-    return (0, _litElement.html)(_templateObject2(), this.image, this.serviceType, this.serviceType, this.description, this.startDate, this.endDate, this.agentNotes, this.moreInfoHandler.bind(this), this.addFavHandler.bind(this));
+    return (0, _litElement.html)(_templateObject2(), this.image, this.serviceType, this.description, _Utils.default.formatDate(this.startDate), _Utils.default.formatDate(this.endDate), this.agentNotes, this.moreInfoHandler.bind(this));
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js"}],"components/va-service-type.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js","../Utils":"Utils.js","../ServiceAPI":"ServiceAPI.js","../views/pages/services":"views/pages/services.js"}],"components/va-service-type.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("@polymer/lit-element");
@@ -17160,7 +16640,7 @@ var _Toast = _interopRequireDefault(require("../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <style>\n          .author {\n            font-size: 0.9em;\n            font-style: italic;\n            opacity: 0.8;\n          }\n\n          img {\n            max-width: 100%; /* Image will not exceed card width */\n            max-height: 200px; /* Restricts image height */\n            width: 100%; /* Scales image to fit card width */\n            object-fit: cover; /* Ensures the image scales nicely within the card */\n            display: block; /* Removes any extra spacing below the image */\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <p>", "</p>\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >More Info</sl-button\n          >\n        </sl-card>"]);
+  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n\n          img {\n            max-width: 100%; /* Image will not exceed card width */\n            max-height: 200px; /* Restricts image height */\n            width: 100%; /* Scales image to fit card width */\n            object-fit: cover; /* Ensures the image scales nicely within the card */\n            display: block; /* Removes any extra spacing below the image */\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Book Now</sl-button\n          >\n        </sl-card>"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -17170,7 +16650,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1>", "</h1>\n            <p>", "</p>\n\n            <sl-button @click=", ">\n              <sl-icon slot=\"prefix\" name=\"heart-fill\"></sl-icon>\n              Add to Favourites\n            </sl-button>\n\n            <!-- Booking form -->\n\n            <h1>New Booking</h1>\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Book Now</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
+  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1 class=\"title\">", "</h1>\n            <p>", "</p>\n\n            <!-- Booking form -->\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Book Now</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -17222,7 +16702,7 @@ customElements.define("va-service-type", class ServiceType extends _litElement.L
     dialogEl.className = "service-dialog"; // add some content to the dialog
     // style the dialog itself in _base.scss
 
-    const dialogContent = (0, _litElement.html)(_templateObject(), this.image, this.serviceType, this.serviceType, this.description, this.addFavHandler.bind(this), this.newBookingSubmitHandler, _Auth.default.currentUser._id, this.serviceType, this.serviceType);
+    const dialogContent = (0, _litElement.html)(_templateObject(), this.image, this.serviceType, this.serviceType, this.description, this.newBookingSubmitHandler, _Auth.default.currentUser._id, this.serviceType, this.serviceType);
     (0, _litHtml.render)(dialogContent, dialogEl); // append to document.body - remember that this needs to occur at the bottom of the document
 
     document.body.append(dialogEl); // show sl-dialog
@@ -17233,8 +16713,7 @@ customElements.define("va-service-type", class ServiceType extends _litElement.L
     dialogEl.addEventListener("sl-after-hide", () => {
       dialogEl.remove();
     });
-  } // TODO - convert this from making a new haircut to making a new service booking
-
+  }
 
   async newBookingSubmitHandler(e) {
     // sl form still behaves like a normal form in that its default
@@ -17273,25 +16752,13 @@ customElements.define("va-service-type", class ServiceType extends _litElement.L
 
       submitBtn.removeAttribute("loading");
     }
-  } // communicates to the backend via the API
-  // async because the UserAPI has to talk to the backend which uses await
-
-
-  async addFavHandler() {
-    try {
-      await _UserAPI.default.addFavHaircut(this.id);
-
-      _Toast.default.show("Haircut added to favourites");
-    } catch (err) {
-      _Toast.default.show(err, "error");
-    }
   } // custom components use the 'shadow DOM' so anything defined in here
   // does not interfere with the outside document
   // you can think of it as being locally scoped or isolated from the rest of the project
 
 
   render() {
-    return (0, _litElement.html)(_templateObject2(), this.image, this.serviceType, this.description, this.bookServiceHandler.bind(this));
+    return (0, _litElement.html)(_templateObject2(), this.image, this.serviceType, this.bookServiceHandler.bind(this));
   }
 
 });
@@ -17453,8 +16920,6 @@ var _App = _interopRequireDefault(require("./App.js"));
 
 require("./components/va-app-header");
 
-require("./components/va-haircut");
-
 require("./components/va-service");
 
 require("./components/va-service-type");
@@ -17473,7 +16938,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener("DOMContentLoaded", () => {
   _App.default.init();
 });
-},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./components/va-haircut":"components/va-haircut.js","./components/va-service":"components/va-service.js","./components/va-service-type":"components/va-service-type.js","./components/va-user":"components/va-user.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./App.js":"App.js","./components/va-app-header":"components/va-app-header.js","./components/va-service":"components/va-service.js","./components/va-service-type":"components/va-service-type.js","./components/va-user":"components/va-user.js","./scss/master.scss":"scss/master.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -17501,7 +16966,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53099" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53860" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

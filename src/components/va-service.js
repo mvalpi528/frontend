@@ -5,6 +5,9 @@ import Auth from "../Auth";
 import App from "../App";
 import UserAPI from "../UserAPI";
 import Toast from "../Toast";
+import Utils from "../Utils";
+import ServiceAPI from "../ServiceAPI";
+import services from "../views/pages/services";
 
 // creating a custom web component
 // import this component in index.js
@@ -89,15 +92,67 @@ customElements.define(
             <img src="${this.image}" alt="${this.serviceType}" />
           </div>
           <div class="content">
-            <h1>${this.serviceType}</h1>
+            <!-- <h1>${this.serviceType}</h1>
             <p>${this.description}</p>
             <p>${this.startDate}</p>
             <p>${this.endDate}</p>
-            <p>${this.agentNotes}</p>
-            <sl-button @click=${this.addFavHandler.bind(this)}>
-              <sl-icon slot="prefix" name="heart-fill"></sl-icon>
-              Add to Favourites
-            </sl-button>
+            <p>${this.agentNotes}</p> -->
+
+            <h1 class="title">Edit Booking</h1>
+            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->
+
+            <h3 class="title">Current booking details</h3>
+
+            <p>Service Type: ${this.serviceType}</p>
+            <p>Description: ${this.description}</p>
+            <p>Start Date: ${Utils.formatDate(this.startDate)}</p>
+            <p>Service Completed: ${Utils.formatDate(this.endDate)}</p>
+            <p>Agent Notes: ${this.agentNotes}</p>
+
+            <sl-form
+              class="page-form"
+              @sl-submit=${this.editBookingSubmitHandler}
+            >
+              <!-- user is submitted in hidden field -->
+              <input
+                type="hidden"
+                name="user"
+                value="${Auth.currentUser._id}"
+              />
+              <input type="hidden" name="id" value="${this.id}" />
+
+              <input
+                type="hidden"
+                name="serviceType"
+                value="${this.serviceType}"
+              />
+              <input
+                type="hidden"
+                name="image"
+                value="${this.serviceType}.jpg"
+              />
+              <div class="input-group">
+                <sl-input
+                  name="startDate"
+                  type="date"
+                  placeholder="Date"
+                  label="Preferred date: "
+                  value=""
+                  required
+                ></sl-input>
+              </div>
+              <div class="input-group">
+                <sl-textarea
+                  name="agentNotes"
+                  rows="3"
+                  placeholder="notes"
+                  value="${this.agentNotes}"
+                ></sl-textarea>
+              </div>
+              <sl-button type="primary" class="submit-btn" submit
+                >Edit Booking</sl-button
+              >
+            </sl-form>
           </div>
         </div>`;
       render(dialogContent, dialogEl);
@@ -112,14 +167,42 @@ customElements.define(
       });
     }
 
-    // communicates to the backend via the API
-    // async because the UserAPI has to talk to the backend which uses await
-    async addFavHandler() {
+    async editBookingSubmitHandler(e) {
+      // sl form still behaves like a normal form in that its default
+      // behaviour is to refresh the page on submit
+      e.preventDefault();
+      // Send form data to HaircutAPI.newHaircut() to pass on to the db
+      const submitBtn = document.querySelector(".submit-btn");
+      submitBtn.setAttribute("loading", "");
+      const formData = e.detail.formData;
+      // the rest of the logic will be handled in the HaircutAPI which we have to import
+      // to get access to. because it needs to happen async put in a try catch
       try {
-        await UserAPI.addFavHaircut(this.id);
-        Toast.show("Haircut added to favourites");
+        await ServiceAPI.editBooking(formData);
+        Toast.show("Booking updated!");
+        // remove loading attribute
+        submitBtn.removeAttribute("loading");
+        // reset form - with a normal html form you can do this in one line
+        // because this is a custom form we have to do everything manually
+        // reset text inputs
+        const textInputs = document.querySelectorAll("sl-input");
+        if (textInputs)
+          textInputs.forEach((textInput) => (textInput.value = null));
+        // reset textarea input
+        const textAreaInput = document.querySelector("sl-textarea");
+        textAreaInput.value = "";
+        // reset radio inputs
+        const radioInputs = document.querySelectorAll("sl-radio");
+        if (radioInputs)
+          radioInputs.forEach((radioInput) =>
+            radioInput.removeAttribute("checked")
+          );
+        // reset file input
+        const fileInput = document.querySelector("input[type=file]");
+        if (fileInput) fileInput.value = null;
       } catch (err) {
         Toast.show(err, "error");
+        submitBtn.removeAttribute("loading");
       }
     }
 
@@ -128,34 +211,25 @@ customElements.define(
     // you can think of it as being locally scoped or isolated from the rest of the project
     render() {
       return html` <style>
-          .author {
-            font-size: 0.9em;
-            font-style: italic;
-            opacity: 0.8;
+          h2 {
+            font-family: "Libre Baskerville", serif;
+            color: #293a4c;
           }
         </style>
         <sl-card>
           <img slot="image" src="${this.image}" />
           <h2>${this.serviceType}</h2>
-          <h3>$${this.serviceType}</h3>
           <p>${this.description}</p>
-          <p>${this.startDate}</p>
-          <p>${this.endDate}</p>
-          <p>${this.agentNotes}</p>
+          <p><b>Booking start date: </b>${Utils.formatDate(this.startDate)}</p>
+          <p><b>Service completed: </b>${Utils.formatDate(this.endDate)}</p>
+          <p><b>Agent notes: </b>${this.agentNotes}</p>
           <!-- this reference to the user obj should work because we have stringified when passing in home.js -->
           <!-- styling happens inside the web component -->
 
           <!-- event listener being added inline -->
           <sl-button @click=${this.moreInfoHandler.bind(this)}
-            >More Info</sl-button
+            >Edit booking</sl-button
           >
-          <!-- shoelace has a number of different icons to use in the button -->
-          <!-- the .bind is so that the favHandler method this keyword refers to the class not the button that clicked -->
-          <sl-icon-button
-            name="heart-fill"
-            label="Add to favorites"
-            @click=${this.addFavHandler.bind(this)}
-          ></sl-icon-button>
         </sl-card>`;
     }
   }

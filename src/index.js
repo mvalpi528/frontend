@@ -4,7 +4,6 @@ import App from "./App.js";
 // by importing these components in the index.js file they become available in all
 // of the other files
 import "./components/va-app-header";
-import "./components/va-haircut";
 import "./components/va-service";
 import "./components/va-service-type";
 import "./components/va-user";
