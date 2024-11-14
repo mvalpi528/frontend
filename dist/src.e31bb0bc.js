@@ -7657,13 +7657,17 @@ class Utils {
 
 
   formatDate(dateString) {
-    const options = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    };
-    const date = new Date(dateString);
-    return date.toLocaleDateString(undefined, options); // Uses locale date formatting
+    if (dateString != "null" || !dateString) {
+      const options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      };
+      const date = new Date(dateString);
+      return date.toLocaleDateString(undefined, options); // Uses locale date formatting
+    } else {
+      return "";
+    }
   }
 
   convertAccessLevelToText(accessLevel) {
@@ -16529,7 +16533,7 @@ var _myServices = _interopRequireDefault(require("../views/pages/myServices"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <p>", "</p>\n          <p><b>Booking start date: </b>", "</p>\n          <p><b>Service completed: </b>", "</p>\n          <p><b>Agent notes: </b>", "</p>\n          <!-- this reference to the user obj should work because we have stringified when passing in home.js -->\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Edit booking</sl-button\n          >\n          <sl-button @click=", "\n            >Delete booking</sl-button\n          >\n        </sl-card>"]);
+  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n          img {\n            width: 300px;\n            height: 200px; /* Set a fixed height */\n            object-fit: cover;\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <p>", "</p>\n          <p><b>Booking start date: </b>", "</p>\n          <p><b>Service completed: </b>", "</p>\n          <p><b>Agent notes: </b>", "</p>\n          <!-- this reference to the user obj should work because we have stringified when passing in home.js -->\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Edit booking</sl-button\n          >\n          <sl-button @click=", "\n            >Delete booking</sl-button\n          >\n        </sl-card>"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -16701,7 +16705,7 @@ var _Toast = _interopRequireDefault(require("../Toast"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n\n          img {\n            max-width: 100%; /* Image will not exceed card width */\n            max-height: 200px; /* Restricts image height */\n            width: 100%; /* Scales image to fit card width */\n            object-fit: cover; /* Ensures the image scales nicely within the card */\n            display: block; /* Removes any extra spacing below the image */\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Book Now</sl-button\n          >\n        </sl-card>"]);
+  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n          sl-card {\n            width: 300px; /* Set a fixed card width */\n          }\n\n          img {\n            max-width: 100%; /* Image will not exceed card width */\n            max-height: 200px; /* Restricts image height */\n            width: 100%; /* Scales image to fit card width */\n            object-fit: cover; /* Ensures the image scales nicely within the card */\n            display: block; /* Removes any extra spacing below the image */\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Book Now</sl-button\n          >\n        </sl-card>"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -16711,7 +16715,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1 class=\"title\">", "</h1>\n            <p>", "</p>\n\n            <!-- Booking form -->\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Book Now</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
+  const data = _taggedTemplateLiteral(["<style>\n          .container {\n            width: 500px;\n            height: 500px;\n            border: 2px solid #333;\n          }\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n            height: 200px;\n            object-fit: cover;\n            display: block;\n          }\n          .content {\n            padding-left: 1em;\n          }\n        </style>\n\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1 class=\"title\">", "</h1>\n            <p>", "</p>\n\n            <!-- Booking form -->\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Book Now</sl-button\n              >\n            </sl-form>\n          </div>\n        </div> "]);
 
   _templateObject = function _templateObject() {
     return data;

@@ -22,9 +22,13 @@ class Utils {
 
   // Helper method to format dates
   formatDate(dateString) {
-    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-    const date = new Date(dateString);
-    return date.toLocaleDateString(undefined, options); // Uses locale date formatting
+    if (dateString != "null" || !dateString) {
+      const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+      const date = new Date(dateString);
+      return date.toLocaleDateString(undefined, options); // Uses locale date formatting
+    } else {
+      return "";
+    }
   }
 
   convertAccessLevelToText(accessLevel) {

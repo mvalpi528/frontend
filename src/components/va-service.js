@@ -238,6 +238,11 @@ customElements.define(
             font-family: "Libre Baskerville", serif;
             color: #293a4c;
           }
+          img {
+            width: 300px;
+            height: 200px; /* Set a fixed height */
+            object-fit: cover;
+          }
         </style>
         <sl-card>
           <img slot="image" src="${this.image}" />

@@ -51,6 +51,11 @@ customElements.define(
       // add some content to the dialog
       // style the dialog itself in _base.scss
       const dialogContent = html`<style>
+          .container {
+            width: 500px;
+            height: 500px;
+            border: 2px solid #333;
+          }
           .wrap {
             display: flex;
           }
@@ -59,20 +64,15 @@ customElements.define(
           }
           .image img {
             width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
           }
           .content {
             padding-left: 1em;
           }
-          .gender span,
-          .length span {
-            text-transform: uppercase;
-            font-weight: bold;
-          }
-          .price {
-            font-size: 1.5em;
-            color: var(--brand-color);
-          }
         </style>
+
         <div class="wrap">
           <div class="image">
             <img src="${this.image}" alt="${this.serviceType}" />
@@ -124,7 +124,7 @@ customElements.define(
               >
             </sl-form>
           </div>
-        </div>`;
+        </div> `;
       render(dialogContent, dialogEl);
       // append to document.body - remember that this needs to occur at the bottom of the document
       document.body.append(dialogEl);
@@ -185,6 +185,9 @@ customElements.define(
           h2 {
             font-family: "Libre Baskerville", serif;
             color: #293a4c;
+          }
+          sl-card {
+            width: 300px; /* Set a fixed card width */
           }
 
           img {
