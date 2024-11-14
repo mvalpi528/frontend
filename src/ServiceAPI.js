@@ -30,7 +30,7 @@ class ServiceAPI {
     // convert response payload into json - store as data
     const data = await response.json();
 
-    // return data - sends back the newly created haircut
+    // return data - sends back the newly created service
     return data;
   }
 
@@ -60,7 +60,7 @@ class ServiceAPI {
     // convert response payload into json - store as data
     const data = await response.json();
 
-    // return data - sends back the newly created haircut
+    // return data - sends back the newly created service
     return data;
   }
 
@@ -86,7 +86,7 @@ class ServiceAPI {
     // convert response payload into json - store as data
     const data = await response.json();
 
-    // return data - sends back the newly created haircut
+    // return data - sends back the newly created service
     return data;
   }
 

@@ -23,7 +23,7 @@ class usersView {
   // the API function simply just returns the data
   async getUsers() {
     try {
-      // returns a json object of all out haircuts and store in variable
+      // returns a json object of all out users and store in variable
       // this takes some time so we need to do this asynchronously
       this.users = await UserAPI.getUsers();
       console.log(this.users);

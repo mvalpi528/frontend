@@ -8,9 +8,10 @@ import Toast from "./Toast";
 class App {
   // Sets some properties for the app
   constructor() {
-    this.name = "Haircuts";
+    this.name = "frontend";
     this.version = "1.0.0";
-    this.apiBase = "http://localhost:3000";
+    this.apiBase =
+      "https://mvalpiani-assignment3-backend-469178981192.herokuapp.com";
     // because everything is inserted in the 'root' element we need
     // to specify what the root element is
     this.rootEl = document.getElementById("root");

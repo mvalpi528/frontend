@@ -10,14 +10,11 @@ import Toast from "../../Toast";
 class MyServicesView {
   init() {
     document.title = "My Services";
-    // this is where the haircuts will be stored when they come in from the backend
+    // this is where the services will be stored when they come in from the backend
     this.services == null;
     this.render();
     Utils.pageIntroAnim();
     this.getServices();
-    if (this.services == null) {
-      Toast.show("You haven't made any bookings yet");
-    }
   }
 
   // apparently it is important to not go straight to the API
@@ -25,7 +22,7 @@ class MyServicesView {
   // the API function simply just returns the data
   async getServices() {
     try {
-      // returns a json object of all out haircuts and store in variable
+      // returns a json object of all services and store in variable
       // this takes some time so we need to do this asynchronously
       this.services = await ServiceAPI.getServices();
       // re renders the page now that we have loaded the services in

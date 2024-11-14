@@ -7708,7 +7708,7 @@ var _Utils = _interopRequireDefault(require("./../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Home\"\n        user=", "\n      ></va-app-header>\n\n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n\n        <p>\n          Welcome to platinum property. Get started by booking a service or\n          editing and exisiting booking!\n        </p>\n\n        <!-- <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", "\n          >View Profile</sl-button\n        >\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        <p></p> -->\n        <!-- if you pass in an object you have to stringify it -->\n        <!-- recommended to begin developing custom components using static content first -->\n        <!-- <va-haircut\n          name=\"Ace Ventura\"\n          description=\"This is the description\"\n          price=\"30\"\n          user=\"", "\"\n          image=\"https://keithandthemovies.com/wp-content/uploads/2012/08/ace-ventura.jpg\"\n          gender=\"m\"\n          length=\"m\"\n        >\n        </va-haircut> -->\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Home\"\n        user=", "\n      ></va-app-header>\n\n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n\n        <p>\n          Welcome to platinum property. Get started by booking a service or\n          editing and exisiting booking!\n        </p>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7729,10 +7729,7 @@ class HomeView {
   }
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, () => (0, _Router.gotoRoute)("/profile"), _Router.anchorRoute, JSON.stringify({
-      firstName: "Marc",
-      lastName: "Valpiani"
-    }));
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName);
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -14033,7 +14030,7 @@ class ServiceAPI {
     } // convert response payload into json - store as data
 
 
-    const data = await response.json(); // return data - sends back the newly created haircut
+    const data = await response.json(); // return data - sends back the newly created service
 
     return data;
   }
@@ -14064,7 +14061,7 @@ class ServiceAPI {
     } // convert response payload into json - store as data
 
 
-    const data = await response.json(); // return data - sends back the newly created haircut
+    const data = await response.json(); // return data - sends back the newly created service
 
     return data;
   }
@@ -14092,7 +14089,7 @@ class ServiceAPI {
     } // convert response payload into json - store as data
 
 
-    const data = await response.json(); // return data - sends back the newly created haircut
+    const data = await response.json(); // return data - sends back the newly created service
 
     return data;
   }
@@ -14216,7 +14213,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 class servicesView {
   init() {
-    document.title = "Services"; // this is where the haircuts will be stored when they come in from the backend
+    document.title = "Services"; // this is where the services will be stored when they come in from the backend
 
     this.services == null;
     this.render();
@@ -14232,7 +14229,7 @@ class servicesView {
 
   async getServices() {
     try {
-      // returns a json object of all out haircuts and store in variable
+      // returns a json object of all out services and store in variable
       // this takes some time so we need to do this asynchronously
       this.services = await _ServiceAPI.default.getServiceTypes(); // re renders the page now that we have loaded the services in
 
@@ -14331,10 +14328,6 @@ class MyServicesView {
     _Utils.default.pageIntroAnim();
 
     this.getServices();
-
-    if (this.services == null) {
-      _Toast.default.show("You haven't made any bookings yet");
-    }
   } // apparently it is important to not go straight to the API
   // function because there are some important preprocessing steps
   // the API function simply just returns the data
@@ -14597,9 +14590,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class App {
   // Sets some properties for the app
   constructor() {
-    this.name = "Haircuts";
+    this.name = "frontend";
     this.version = "1.0.0";
-    this.apiBase = "http://localhost:3000"; // because everything is inserted in the 'root' element we need
+    this.apiBase = "https://mvalpiani-assignment3-backend-469178981192.herokuapp.com"; // because everything is inserted in the 'root' element we need
     // to specify what the root element is
 
     this.rootEl = document.getElementById("root");
@@ -16623,11 +16616,11 @@ customElements.define("va-service", class Service extends _litElement.LitElement
   async editBookingSubmitHandler(e) {
     // sl form still behaves like a normal form in that its default
     // behaviour is to refresh the page on submit
-    e.preventDefault(); // Send form data to HaircutAPI.newHaircut() to pass on to the db
+    e.preventDefault(); // Send form data to ServiceAPI to pass on to the db
 
     const submitBtn = document.querySelector(".submit-btn");
     submitBtn.setAttribute("loading", "");
-    const formData = e.detail.formData; // the rest of the logic will be handled in the HaircutAPI which we have to import
+    const formData = e.detail.formData; // the rest of the logic will be handled in the SericeAPI which we have to import
     // to get access to. because it needs to happen async put in a try catch
 
     try {
@@ -17033,7 +17026,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60845" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59529" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

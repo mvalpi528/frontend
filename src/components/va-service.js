@@ -100,7 +100,7 @@ customElements.define(
             <p>${this.agentNotes}</p> -->
 
             <h1 class="title">Edit Booking</h1>
-            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->
+            <!-- when the form is submitted it will run the SubmitHandler form -->
 
             <h3 class="title">Current booking details</h3>
 
@@ -181,11 +181,11 @@ customElements.define(
       // sl form still behaves like a normal form in that its default
       // behaviour is to refresh the page on submit
       e.preventDefault();
-      // Send form data to HaircutAPI.newHaircut() to pass on to the db
+      // Send form data to ServiceAPI to pass on to the db
       const submitBtn = document.querySelector(".submit-btn");
       submitBtn.setAttribute("loading", "");
       const formData = e.detail.formData;
-      // the rest of the logic will be handled in the HaircutAPI which we have to import
+      // the rest of the logic will be handled in the SericeAPI which we have to import
       // to get access to. because it needs to happen async put in a try catch
       try {
         await ServiceAPI.editBooking(formData);

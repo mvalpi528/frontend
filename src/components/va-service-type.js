@@ -82,7 +82,7 @@ customElements.define(
             <p>${this.description}</p>
 
             <!-- Booking form -->
-            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->
+            <!-- when the form is submitted it will run the newBookingtSubmitHandler form -->
             <sl-form
               class="page-form"
               @sl-submit=${this.newBookingSubmitHandler}
@@ -141,11 +141,10 @@ customElements.define(
       // sl form still behaves like a normal form in that its default
       // behaviour is to refresh the page on submit
       e.preventDefault();
-      // Send form data to HaircutAPI.newHaircut() to pass on to the db
       const submitBtn = document.querySelector(".submit-btn");
       submitBtn.setAttribute("loading", "");
       const formData = e.detail.formData;
-      // the rest of the logic will be handled in the HaircutAPI which we have to import
+      // the rest of the logic will be handled in the ServiceAPI which we have to import
       // to get access to. because it needs to happen async put in a try catch
       try {
         console.log(formData);

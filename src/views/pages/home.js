@@ -26,27 +26,6 @@ class HomeView {
           Welcome to platinum property. Get started by booking a service or
           editing and exisiting booking!
         </p>
-
-        <!-- <h3>Button example:</h3>
-        <sl-button class="anim-in" @click=${() => gotoRoute("/profile")}
-          >View Profile</sl-button
-        >
-        <p>&nbsp;</p>
-        <h3>Link example</h3>
-        <a href="/profile" @click=${anchorRoute}>View Profile</a>
-        <p></p> -->
-        <!-- if you pass in an object you have to stringify it -->
-        <!-- recommended to begin developing custom components using static content first -->
-        <!-- <va-haircut
-          name="Ace Ventura"
-          description="This is the description"
-          price="30"
-          user="${JSON.stringify({ firstName: "Marc", lastName: "Valpiani" })}"
-          image="https://keithandthemovies.com/wp-content/uploads/2012/08/ace-ventura.jpg"
-          gender="m"
-          length="m"
-        >
-        </va-haircut> -->
       </div>
     `;
     render(template, App.rootEl);
