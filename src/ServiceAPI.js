@@ -48,7 +48,33 @@ class ServiceAPI {
 
     // if response not ok
     if (!response.ok) {
-      let message = "Problem creating booking";
+      let message = "Problem editing booking";
+      if (response.status == 400) {
+        const err = await response.json();
+        message = err.message;
+      }
+      // throw error (exit this function)
+      throw new Error(message);
+    }
+
+    // convert response payload into json - store as data
+    const data = await response.json();
+
+    // return data - sends back the newly created haircut
+    return data;
+  }
+
+  async deleteBooking(id) {
+    // send request via fetch to PUT route
+    const response = await fetch(`${App.apiBase}/service/${id}`, {
+      method: "DELETE",
+      // sending along the JSON web token along with the request
+      headers: { Authorization: `Bearer ${localStorage.accessToken}` },
+    });
+
+    // if response not ok
+    if (!response.ok) {
+      let message = "Problem deleting booking";
       if (response.status == 400) {
         const err = await response.json();
         message = err.message;

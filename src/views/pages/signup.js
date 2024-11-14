@@ -28,8 +28,7 @@ class SignUpView {
     const template = html`
       <div class="page-content page-centered">
         <div class="signinup-box">
-          <img class="signinup-logo" src="/images/logo.svg" />
-          <h1>Sign Up</h1>
+          <h1 class="title">Sign Up</h1>
           <sl-form class="form-signup" @sl-submit=${this.signUpSubmitHandler}>
             <div class="input-group">
               <sl-input
@@ -67,7 +66,7 @@ class SignUpView {
             <div class="input-group">
               <sl-select name="accessLevel" placeholder="I am a ...">
                 <sl-menu-item value="1">Customer</sl-menu-item>
-                <sl-menu-item value="2">Hairdresser</sl-menu-item>
+                <sl-menu-item value="2">Agent</sl-menu-item>
               </sl-select>
             </div>
             <sl-button

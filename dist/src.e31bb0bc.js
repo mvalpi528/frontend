@@ -7666,6 +7666,18 @@ class Utils {
     return date.toLocaleDateString(undefined, options); // Uses locale date formatting
   }
 
+  convertAccessLevelToText(accessLevel) {
+    var accessLevelName = "";
+
+    if (accessLevel == 1) {
+      accessLevelName = "Client";
+    } else if (accessLevel == 2) {
+      accessLevelName = "Agent";
+    }
+
+    return accessLevelName;
+  }
+
 }
 
 var _default = new Utils();
@@ -7692,7 +7704,7 @@ var _Utils = _interopRequireDefault(require("./../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Home\"\n        user=", "\n      ></va-app-header>\n\n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n\n        <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", "\n          >View Profile</sl-button\n        >\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        <p></p>\n        <!-- if you pass in an object you have to stringify it -->\n        <!-- recommended to begin developing custom components using static content first -->\n        <!-- <va-haircut\n          name=\"Ace Ventura\"\n          description=\"This is the description\"\n          price=\"30\"\n          user=\"", "\"\n          image=\"https://keithandthemovies.com/wp-content/uploads/2012/08/ace-ventura.jpg\"\n          gender=\"m\"\n          length=\"m\"\n        >\n        </va-haircut> -->\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Home\"\n        user=", "\n      ></va-app-header>\n\n      <div class=\"page-content\">\n        <h1 class=\"anim-in\">Hey ", "</h1>\n\n        <p>\n          Welcome to platinum property. Get started by booking a service or\n          editing and exisiting booking!\n        </p>\n\n        <!-- <h3>Button example:</h3>\n        <sl-button class=\"anim-in\" @click=", "\n          >View Profile</sl-button\n        >\n        <p>&nbsp;</p>\n        <h3>Link example</h3>\n        <a href=\"/profile\" @click=", ">View Profile</a>\n        <p></p> -->\n        <!-- if you pass in an object you have to stringify it -->\n        <!-- recommended to begin developing custom components using static content first -->\n        <!-- <va-haircut\n          name=\"Ace Ventura\"\n          description=\"This is the description\"\n          price=\"30\"\n          user=\"", "\"\n          image=\"https://keithandthemovies.com/wp-content/uploads/2012/08/ace-ventura.jpg\"\n          gender=\"m\"\n          length=\"m\"\n        >\n        </va-haircut> -->\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -7858,7 +7870,7 @@ var _Utils = _interopRequireDefault(require("./../../Utils"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <div class=\"page-content page-centered\">\n        <div class=\"signinup-box\">\n          <img class=\"signinup-logo\" src=\"/images/logo.svg\" />\n          <h1>Sign Up</h1>\n          <sl-form class=\"form-signup\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input\n                name=\"firstName\"\n                type=\"text\"\n                placeholder=\"First Name\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"lastName\"\n                type=\"text\"\n                placeholder=\"Last Name\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"email\"\n                type=\"email\"\n                placeholder=\"Email\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"password\"\n                type=\"password\"\n                placeholder=\"Password\"\n                required\n                toggle-password\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name=\"accessLevel\" placeholder=\"I am a ...\">\n                <sl-menu-item value=\"1\">Customer</sl-menu-item>\n                <sl-menu-item value=\"2\">Hairdresser</sl-menu-item>\n              </sl-select>\n            </div>\n            <sl-button\n              type=\"primary\"\n              class=\"submit-btn\"\n              submit\n              style=\"width: 100%;\"\n              >Sign Up</sl-button\n            >\n          </sl-form>\n          <p>\n            Have an account? <a href=\"/signin\" @click=", ">Sign In</a>\n          </p>\n        </div>\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n      <div class=\"page-content page-centered\">\n        <div class=\"signinup-box\">\n          <h1 class=\"title\">Sign Up</h1>\n          <sl-form class=\"form-signup\" @sl-submit=", ">\n            <div class=\"input-group\">\n              <sl-input\n                name=\"firstName\"\n                type=\"text\"\n                placeholder=\"First Name\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"lastName\"\n                type=\"text\"\n                placeholder=\"Last Name\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"email\"\n                type=\"email\"\n                placeholder=\"Email\"\n                required\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-input\n                name=\"password\"\n                type=\"password\"\n                placeholder=\"Password\"\n                required\n                toggle-password\n              ></sl-input>\n            </div>\n            <div class=\"input-group\">\n              <sl-select name=\"accessLevel\" placeholder=\"I am a ...\">\n                <sl-menu-item value=\"1\">Customer</sl-menu-item>\n                <sl-menu-item value=\"2\">Agent</sl-menu-item>\n              </sl-select>\n            </div>\n            <sl-button\n              type=\"primary\"\n              class=\"submit-btn\"\n              submit\n              style=\"width: 100%;\"\n              >Sign Up</sl-button\n            >\n          </sl-form>\n          <p>\n            Have an account? <a href=\"/signin\" @click=", ">Sign In</a>\n          </p>\n        </div>\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13931,7 +13943,7 @@ var _UserAPI = _interopRequireDefault(require("../../UserAPI"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Guide\"\n        user=\"", "\"\n      ></va-app-header>\n      <div class=\"page-content calign\">\n        <h3 class=\"brand-color\">Welcome ", "!</h3>\n        <p>\n          This is a quick tour to teach you the basics of using Haircuts ...\n        </p>\n\n        <div class=\"guide-step\">\n          <h4>Search Hairdressers</h4>\n          <img\n            src=\"https://plchldr.co/i/500x300?&bg=dddddd&fc=666666&text=IMAGE\"\n          />\n        </div>\n\n        <div class=\"guide-step\">\n          <h4>Find a haircut</h4>\n          <img\n            src=\"https://plchldr.co/i/500x300?&bg=dddddd&fc=666666&text=IMAGE\"\n          />\n        </div>\n\n        <div class=\"guide-step\">\n          <h4>Save haircuts to favourites</h4>\n          <img\n            src=\"https://plchldr.co/i/500x300?&bg=dddddd&fc=666666&text=IMAGE\"\n          />\n        </div>\n\n        <sl-button type=\"primary\" @click=", "\n          >Okay got it!</sl-button\n        >\n      </div>\n    "]);
+  const data = _taggedTemplateLiteral(["\n      <va-app-header\n        title=\"Guide\"\n        user=\"", "\"\n      ></va-app-header>\n      <div class=\"page-content calign\">\n        <h3 class=\"brand-color\">Hello ", "!</h3>\n        <p>\n          Welcome to Platinum Property - Here's a quick tour of what you can do\n          on the site\n        </p>\n\n        <div class=\"guide-step\">\n          <h4>Book Services</h4>\n          <p>\n            Visit the services page to view and book one of our many property\n            services\n          </p>\n          <img src=\"", "/images/guide-img-1.jpg\" />\n        </div>\n\n        <div class=\"guide-step\">\n          <h4>Manage services</h4>\n          <p>Visit the My Services page to view, edit or delete a booking</p>\n          <img src=\"", "/images/guide-img-2.jpg\" />\n        </div>\n\n        <div class=\"guide-step\">\n          <h4>Agents can view clients</h4>\n          <p>Agents can view all clients who have made an account with us</p>\n          <img src=\"", "/images/guide-img-3.jpg\" />\n        </div>\n\n        <sl-button type=\"primary\" @click=", "\n          >Okay got it!</sl-button\n        >\n      </div>\n    "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -13964,7 +13976,7 @@ class GuideView {
   }
 
   render() {
-    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, () => (0, _Router.gotoRoute)("/"));
+    const template = (0, _litHtml.html)(_templateObject(), JSON.stringify(_Auth.default.currentUser), _Auth.default.currentUser.firstName, _App.default.apiBase, _App.default.apiBase, _App.default.apiBase, () => (0, _Router.gotoRoute)("/"));
     (0, _litHtml.render)(template, _App.default.rootEl);
   }
 
@@ -14036,7 +14048,35 @@ class ServiceAPI {
     }); // if response not ok
 
     if (!response.ok) {
-      let message = "Problem creating booking";
+      let message = "Problem editing booking";
+
+      if (response.status == 400) {
+        const err = await response.json();
+        message = err.message;
+      } // throw error (exit this function)
+
+
+      throw new Error(message);
+    } // convert response payload into json - store as data
+
+
+    const data = await response.json(); // return data - sends back the newly created haircut
+
+    return data;
+  }
+
+  async deleteBooking(id) {
+    // send request via fetch to PUT route
+    const response = await fetch("".concat(_App.default.apiBase, "/service/").concat(id), {
+      method: "DELETE",
+      // sending along the JSON web token along with the request
+      headers: {
+        Authorization: "Bearer ".concat(localStorage.accessToken)
+      }
+    }); // if response not ok
+
+    if (!response.ok) {
+      let message = "Problem deleting booking";
 
       if (response.status == 400) {
         const err = await response.json();
@@ -14287,7 +14327,10 @@ class MyServicesView {
     _Utils.default.pageIntroAnim();
 
     this.getServices();
-    console.log(this.services);
+
+    if (this.services == null) {
+      _Toast.default.show("You haven't made any bookings yet");
+    }
   } // apparently it is important to not go straight to the API
   // function because there are some important preprocessing steps
   // the API function simply just returns the data
@@ -14297,8 +14340,7 @@ class MyServicesView {
     try {
       // returns a json object of all out haircuts and store in variable
       // this takes some time so we need to do this asynchronously
-      this.services = await _ServiceAPI.default.getServices();
-      console.log(this.services); // re renders the page now that we have loaded the services in
+      this.services = await _ServiceAPI.default.getServices(); // re renders the page now that we have loaded the services in
 
       this.render();
     } catch (err) {
@@ -16353,7 +16395,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  const data = _taggedTemplateLiteral(["<a href=\"/newHaircut\" @click=\"", "\"\n                  >Add Haircut</a\n                >"]);
+  const data = _taggedTemplateLiteral(["<a href=\"/users\" @click=\"", "\"\n                  >View clients</a\n                >"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -16373,7 +16415,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  const data = _taggedTemplateLiteral(["<a href=\"/newHaircut\" @click=\"", "\"\n                  >Add Haircut</a\n                >"]);
+  const data = _taggedTemplateLiteral(["<a href=\"/users\" @click=\"", "\">See users</a>"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -16393,7 +16435,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["\n        <style>\n          * {\n            box-sizing: border-box;\n          }\n          .app-header {\n            background: var(--brand-color);\n            position: fixed;\n            top: 0;\n            right: 0;\n            left: 0;\n            height: var(--app-header-height);\n            color: #fff;\n            display: flex;\n            z-index: 9;\n            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);\n            align-items: center;\n          }\n\n          .app-header-main {\n            flex-grow: 1;\n            display: flex;\n            align-items: center;\n          }\n\n          .app-header-main::slotted(h1) {\n            color: #fff;\n          }\n\n          .app-logo a {\n            color: #fff;\n            text-decoration: none;\n            font-weight: bold;\n            font-size: 1.2em;\n            padding: 0.6em;\n            display: inline-block;\n          }\n\n          .app-logo img {\n            width: 90px;\n          }\n\n          .hamburger-btn::part(base) {\n            color: #fff;\n          }\n\n          .app-top-nav {\n            display: flex;\n            height: 100%;\n            align-items: center;\n          }\n\n          .app-top-nav a {\n            display: inline-block;\n            padding: 0.8em;\n            text-decoration: none;\n            color: #fff;\n          }\n\n          .app-side-menu-items a {\n            display: block;\n            padding: 0.5em;\n            text-decoration: none;\n            font-size: 1.3em;\n            color: #333;\n          }\n\n          .app-side-menu-logo {\n            width: 120px;\n            margin-bottom: 1em;\n            position: absolute;\n            top: 2em;\n            left: 1.5em;\n          }\n\n          .page-title {\n            color: var(--app-header-txt-color);\n            margin-right: 0.5em;\n            font-size: var(--app-header-title-font-size);\n            font-family: var(--secondary-font-family);\n          }\n\n          /* active nav links */\n          .app-top-nav a.active,\n          .app-side-menu-items a.active {\n            font-weight: bold;\n          }\n\n          /* RESPONSIVE - MOBILE ------------------- */\n          @media all and (max-width: 768px) {\n            .app-top-nav {\n              display: none;\n            }\n          }\n        </style>\n\n        <header class=\"app-header\">\n          <sl-icon-button\n            class=\"hamburger-btn\"\n            name=\"list\"\n            @click=\"", "\"\n            style=\"font-size: 1.5em;\"\n          ></sl-icon-button>\n\n          <div class=\"app-header-main\">\n            ", "\n            <slot></slot>\n          </div>\n\n          <nav class=\"app-top-nav\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n\n            <!-- can access a user becuase they are passed into components as a property -->\n            ", "\n            <sl-dropdown>\n              <a slot=\"trigger\" href=\"#\" @click=\"", "\">\n                <sl-avatar\n                  style=\"--size: 24px;\"\n                  image=", "\n                ></sl-avatar>\n                ", "\n              </a>\n              <sl-menu>\n                <sl-menu-item @click=\"", "\"\n                  >Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Edit Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Sign Out</sl-menu-item\n                >\n              </sl-menu>\n            </sl-dropdown>\n          </nav>\n        </header>\n\n        <sl-drawer class=\"app-side-menu\" placement=\"left\">\n          <img class=\"app-side-menu-logo\" src=\"/images/logo.svg\" />\n          <nav class=\"app-side-menu-items\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n            ", "\n            <a href=\"/services\" @click=\"", "\">Book a service</a>\n            <a href=\"/myServices\" @click=\"", "\">My Services</a>\n            <a href=\"/profile\" @click=\"", "\">Profile</a>\n            <a href=\"#\" @click=\"", "\">Sign Out</a>\n          </nav>\n        </sl-drawer>\n      "]);
+  const data = _taggedTemplateLiteral(["\n        <style>\n          * {\n            box-sizing: border-box;\n          }\n          .app-header {\n            background: var(--brand-color);\n            position: fixed;\n            top: 0;\n            right: 0;\n            left: 0;\n            height: var(--app-header-height);\n            color: #fff;\n            display: flex;\n            z-index: 9;\n            box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.2);\n            align-items: center;\n          }\n\n          .app-header-main {\n            flex-grow: 1;\n            display: flex;\n            align-items: center;\n          }\n\n          .app-header-main::slotted(h1) {\n            color: #fff;\n          }\n\n          .app-logo a {\n            color: #fff;\n            text-decoration: none;\n            font-weight: bold;\n            font-size: 1.2em;\n            padding: 0.6em;\n            display: inline-block;\n          }\n\n          .app-logo img {\n            width: 90px;\n          }\n\n          .hamburger-btn::part(base) {\n            color: #fff;\n          }\n\n          .app-top-nav {\n            display: flex;\n            height: 100%;\n            align-items: center;\n          }\n\n          .app-top-nav a {\n            display: inline-block;\n            padding: 0.8em;\n            text-decoration: none;\n            color: #fff;\n          }\n\n          .app-side-menu-items a {\n            display: block;\n            padding: 0.5em;\n            text-decoration: none;\n            font-size: 1.3em;\n            color: #333;\n          }\n\n          .app-side-menu-logo {\n            width: 120px;\n            margin-bottom: 1em;\n            position: absolute;\n            top: 2em;\n            left: 1.5em;\n          }\n\n          .page-title {\n            color: var(--app-header-txt-color);\n            margin-right: 0.5em;\n            font-size: var(--app-header-title-font-size);\n            font-family: var(--secondary-font-family);\n          }\n\n          /* active nav links */\n          .app-top-nav a.active,\n          .app-side-menu-items a.active {\n            font-weight: bold;\n          }\n\n          /* RESPONSIVE - MOBILE ------------------- */\n          @media all and (max-width: 768px) {\n            .app-top-nav {\n              display: none;\n            }\n          }\n\n          .title {\n            font-family: var(--secondary-font-family);\n            color: var(--sl-color-primary-500);\n          }\n        </style>\n\n        <header class=\"app-header\">\n          <sl-icon-button\n            class=\"hamburger-btn\"\n            name=\"list\"\n            @click=\"", "\"\n            style=\"font-size: 1.5em;\"\n          ></sl-icon-button>\n\n          <div class=\"app-header-main\">\n            ", "\n            <slot></slot>\n          </div>\n\n          <nav class=\"app-top-nav\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n\n            <!-- can access a user becuase they are passed into components as a property -->\n            ", "\n            <sl-dropdown>\n              <a slot=\"trigger\" href=\"#\" @click=\"", "\">\n                <sl-avatar\n                  style=\"--size: 24px;\"\n                  image=", "\n                ></sl-avatar>\n                ", "\n              </a>\n              <sl-menu>\n                <sl-menu-item @click=\"", "\"\n                  >Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Edit Profile</sl-menu-item\n                >\n                <sl-menu-item @click=\"", "\"\n                  >Sign Out</sl-menu-item\n                >\n              </sl-menu>\n            </sl-dropdown>\n          </nav>\n        </header>\n\n        <sl-drawer class=\"app-side-menu\" placement=\"left\">\n          <h2 class=\"title\">Platinum Property</h2>\n          <nav class=\"app-side-menu-items\">\n            <a href=\"/\" @click=\"", "\">Home</a>\n            ", "\n            <a href=\"/services\" @click=\"", "\">Book a service</a>\n            <a href=\"/myServices\" @click=\"", "\">My Services</a>\n            <a href=\"/profile\" @click=\"", "\">Profile</a>\n            <a href=\"#\" @click=\"", "\">Sign Out</a>\n          </nav>\n        </sl-drawer>\n      "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16482,10 +16524,12 @@ var _ServiceAPI = _interopRequireDefault(require("../ServiceAPI"));
 
 var _services = _interopRequireDefault(require("../views/pages/services"));
 
+var _myServices = _interopRequireDefault(require("../views/pages/myServices"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject2() {
-  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <p>", "</p>\n          <p><b>Booking start date: </b>", "</p>\n          <p><b>Service completed: </b>", "</p>\n          <p><b>Agent notes: </b>", "</p>\n          <!-- this reference to the user obj should work because we have stringified when passing in home.js -->\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Edit booking</sl-button\n          >\n        </sl-card>"]);
+  const data = _taggedTemplateLiteral([" <style>\n          h2 {\n            font-family: \"Libre Baskerville\", serif;\n            color: #293a4c;\n          }\n        </style>\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2>", "</h2>\n          <p>", "</p>\n          <p><b>Booking start date: </b>", "</p>\n          <p><b>Service completed: </b>", "</p>\n          <p><b>Agent notes: </b>", "</p>\n          <!-- this reference to the user obj should work because we have stringified when passing in home.js -->\n          <!-- styling happens inside the web component -->\n\n          <!-- event listener being added inline -->\n          <sl-button @click=", "\n            >Edit booking</sl-button\n          >\n          <sl-button @click=", "\n            >Delete booking</sl-button\n          >\n        </sl-card>"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -16495,7 +16539,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <!-- <h1>", "</h1>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p> -->\n\n            <h1 class=\"title\">Edit Booking</h1>\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n\n            <h3 class=\"title\">Current booking details</h3>\n\n            <p>Service Type: ", "</p>\n            <p>Description: ", "</p>\n            <p>Start Date: ", "</p>\n            <p>Service Completed: ", "</p>\n            <p>Agent Notes: ", "</p>\n\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input type=\"hidden\" name=\"id\" value=\"", "\" />\n\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  value=\"\"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                  value=\"", "\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Edit Booking</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
+  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <!-- <h1>", "</h1>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p> -->\n\n            <h1 class=\"title\">Edit Booking</h1>\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n\n            <h3 class=\"title\">Current booking details</h3>\n\n            <p>Service Type: ", "</p>\n            <p>Description: ", "</p>\n            <p>Start Date: ", "</p>\n            <p>Service Completed: ", "</p>\n            <p>Agent Notes: ", "</p>\n\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input type=\"hidden\" name=\"id\" value=\"", "\" />\n\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  value=\"\"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"endDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"end date: \"\n                  value=\"\"\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                  value=\"", "\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Edit Booking</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16603,10 +16647,27 @@ customElements.define("va-service", class Service extends _litElement.LitElement
 
       const fileInput = document.querySelector("input[type=file]");
       if (fileInput) fileInput.value = null;
+
+      _myServices.default.getServices();
     } catch (err) {
       _Toast.default.show(err, "error");
 
       submitBtn.removeAttribute("loading");
+    }
+  }
+
+  async deleteBookingHandler(e) {
+    e.preventDefault();
+
+    try {
+      await _ServiceAPI.default.deleteBooking(this.id);
+      console.log("reached");
+
+      _Toast.default.show("Booking deleted!");
+
+      _myServices.default.getServices();
+    } catch (err) {
+      _Toast.default.show(err, "error");
     }
   } // custom components use the 'shadow DOM' so anything defined in here
   // does not interfere with the outside document
@@ -16614,11 +16675,11 @@ customElements.define("va-service", class Service extends _litElement.LitElement
 
 
   render() {
-    return (0, _litElement.html)(_templateObject2(), this.image, this.serviceType, this.description, _Utils.default.formatDate(this.startDate), _Utils.default.formatDate(this.endDate), this.agentNotes, this.moreInfoHandler.bind(this));
+    return (0, _litElement.html)(_templateObject2(), this.image, this.serviceType, this.description, _Utils.default.formatDate(this.startDate), _Utils.default.formatDate(this.endDate), this.agentNotes, this.moreInfoHandler.bind(this), this.deleteBookingHandler.bind(this));
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js","../Utils":"Utils.js","../ServiceAPI":"ServiceAPI.js","../views/pages/services":"views/pages/services.js"}],"components/va-service-type.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js","../Utils":"Utils.js","../ServiceAPI":"ServiceAPI.js","../views/pages/services":"views/pages/services.js","../views/pages/myServices":"views/pages/myServices.js"}],"components/va-service-type.js":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("@polymer/lit-element");
@@ -16779,10 +16840,12 @@ var _UserAPI = _interopRequireDefault(require("../UserAPI"));
 
 var _Toast = _interopRequireDefault(require("../Toast"));
 
+var _Utils = _interopRequireDefault(require("../Utils"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral([" <sl-card>\n        <img slot=\"image\" src=\"", "\" />\n        <h2>", " ", "</h2>\n        <p>", "</p>\n        <p>", "</p>\n        <p>", "</p>\n      </sl-card>"]);
+  const data = _taggedTemplateLiteral([" <style>\n          .title {\n            font-family: var(--secondary-font-family);\n            color: var(--sl-color-primary-500);\n          }\n        </style>\n\n        <sl-card>\n          <img slot=\"image\" src=\"", "\" />\n          <h2 class=\"title\">", " ", "</h2>\n          <p>Email: ", "</p>\n          <p>Bio: ", "</p>\n          <p>User type: ", "</p>\n        </sl-card>"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16837,11 +16900,11 @@ customElements.define("va-user", class User extends _litElement.LitElement {
 
 
   render() {
-    return (0, _litElement.html)(_templateObject(), this.avatar, this.firstName, this.firstName, this.email, this.bio, this.accessLevel);
+    return (0, _litElement.html)(_templateObject(), this.avatar, this.firstName, this.lastName, this.email, this.bio, _Utils.default.convertAccessLevelToText(this.accessLevel));
   }
 
 });
-},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"@polymer/lit-element":"../node_modules/@polymer/lit-element/lit-element.js","lit-html":"../node_modules/lit-html/lit-html.js","../Router":"Router.js","../Auth":"Auth.js","../App":"App.js","../UserAPI":"UserAPI.js","../Toast":"Toast.js","../Utils":"Utils.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -16966,7 +17029,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53860" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60845" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

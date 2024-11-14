@@ -8,6 +8,7 @@ import Toast from "../Toast";
 import Utils from "../Utils";
 import ServiceAPI from "../ServiceAPI";
 import services from "../views/pages/services";
+import myServices from "../views/pages/myServices";
 
 // creating a custom web component
 // import this component in index.js
@@ -142,6 +143,15 @@ customElements.define(
                 ></sl-input>
               </div>
               <div class="input-group">
+                <sl-input
+                  name="endDate"
+                  type="date"
+                  placeholder="Date"
+                  label="end date: "
+                  value=""
+                ></sl-input>
+              </div>
+              <div class="input-group">
                 <sl-textarea
                   name="agentNotes"
                   rows="3"
@@ -200,9 +210,22 @@ customElements.define(
         // reset file input
         const fileInput = document.querySelector("input[type=file]");
         if (fileInput) fileInput.value = null;
+        myServices.getServices();
       } catch (err) {
         Toast.show(err, "error");
         submitBtn.removeAttribute("loading");
+      }
+    }
+
+    async deleteBookingHandler(e) {
+      e.preventDefault();
+      try {
+        await ServiceAPI.deleteBooking(this.id);
+        console.log("reached");
+        Toast.show("Booking deleted!");
+        myServices.getServices();
+      } catch (err) {
+        Toast.show(err, "error");
       }
     }
 
@@ -229,6 +252,9 @@ customElements.define(
           <!-- event listener being added inline -->
           <sl-button @click=${this.moreInfoHandler.bind(this)}
             >Edit booking</sl-button
+          >
+          <sl-button @click=${this.deleteBookingHandler.bind(this)}
+            >Delete booking</sl-button
           >
         </sl-card>`;
     }

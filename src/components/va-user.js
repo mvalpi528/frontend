@@ -5,6 +5,7 @@ import Auth from "../Auth";
 import App from "../App";
 import UserAPI from "../UserAPI";
 import Toast from "../Toast";
+import Utils from "../Utils";
 
 // creating a custom web component
 // import this component in index.js
@@ -52,13 +53,20 @@ customElements.define(
     // does not interfere with the outside document
     // you can think of it as being locally scoped or isolated from the rest of the project
     render() {
-      return html` <sl-card>
-        <img slot="image" src="${this.avatar}" />
-        <h2>${this.firstName} ${this.firstName}</h2>
-        <p>${this.email}</p>
-        <p>${this.bio}</p>
-        <p>${this.accessLevel}</p>
-      </sl-card>`;
+      return html` <style>
+          .title {
+            font-family: var(--secondary-font-family);
+            color: var(--sl-color-primary-500);
+          }
+        </style>
+
+        <sl-card>
+          <img slot="image" src="${this.avatar}" />
+          <h2 class="title">${this.firstName} ${this.lastName}</h2>
+          <p>Email: ${this.email}</p>
+          <p>Bio: ${this.bio}</p>
+          <p>User type: ${Utils.convertAccessLevelToText(this.accessLevel)}</p>
+        </sl-card>`;
     }
   }
 );

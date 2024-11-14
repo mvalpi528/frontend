@@ -35,30 +35,31 @@ class GuideView {
         user="${JSON.stringify(Auth.currentUser)}"
       ></va-app-header>
       <div class="page-content calign">
-        <h3 class="brand-color">Welcome ${Auth.currentUser.firstName}!</h3>
+        <h3 class="brand-color">Hello ${Auth.currentUser.firstName}!</h3>
         <p>
-          This is a quick tour to teach you the basics of using Haircuts ...
+          Welcome to Platinum Property - Here's a quick tour of what you can do
+          on the site
         </p>
 
         <div class="guide-step">
-          <h4>Search Hairdressers</h4>
-          <img
-            src="https://plchldr.co/i/500x300?&bg=dddddd&fc=666666&text=IMAGE"
-          />
+          <h4>Book Services</h4>
+          <p>
+            Visit the services page to view and book one of our many property
+            services
+          </p>
+          <img src="${App.apiBase}/images/guide-img-1.jpg" />
         </div>
 
         <div class="guide-step">
-          <h4>Find a haircut</h4>
-          <img
-            src="https://plchldr.co/i/500x300?&bg=dddddd&fc=666666&text=IMAGE"
-          />
+          <h4>Manage services</h4>
+          <p>Visit the My Services page to view, edit or delete a booking</p>
+          <img src="${App.apiBase}/images/guide-img-2.jpg" />
         </div>
 
         <div class="guide-step">
-          <h4>Save haircuts to favourites</h4>
-          <img
-            src="https://plchldr.co/i/500x300?&bg=dddddd&fc=666666&text=IMAGE"
-          />
+          <h4>Agents can view clients</h4>
+          <p>Agents can view all clients who have made an account with us</p>
+          <img src="${App.apiBase}/images/guide-img-3.jpg" />
         </div>
 
         <sl-button type="primary" @click=${() => gotoRoute("/")}

@@ -26,6 +26,16 @@ class Utils {
     const date = new Date(dateString);
     return date.toLocaleDateString(undefined, options); // Uses locale date formatting
   }
+
+  convertAccessLevelToText(accessLevel) {
+    var accessLevelName = "";
+    if (accessLevel == 1) {
+      accessLevelName = "Client";
+    } else if (accessLevel == 2) {
+      accessLevelName = "Agent";
+    }
+    return accessLevelName;
+  }
 }
 
 export default new Utils();

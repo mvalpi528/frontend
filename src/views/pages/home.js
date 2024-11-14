@@ -22,14 +22,19 @@ class HomeView {
       <div class="page-content">
         <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
 
-        <h3>Button example:</h3>
+        <p>
+          Welcome to platinum property. Get started by booking a service or
+          editing and exisiting booking!
+        </p>
+
+        <!-- <h3>Button example:</h3>
         <sl-button class="anim-in" @click=${() => gotoRoute("/profile")}
           >View Profile</sl-button
         >
         <p>&nbsp;</p>
         <h3>Link example</h3>
         <a href="/profile" @click=${anchorRoute}>View Profile</a>
-        <p></p>
+        <p></p> -->
         <!-- if you pass in an object you have to stringify it -->
         <!-- recommended to begin developing custom components using static content first -->
         <!-- <va-haircut

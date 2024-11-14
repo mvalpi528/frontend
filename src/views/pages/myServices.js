@@ -15,7 +15,9 @@ class MyServicesView {
     this.render();
     Utils.pageIntroAnim();
     this.getServices();
-    console.log(this.services);
+    if (this.services == null) {
+      Toast.show("You haven't made any bookings yet");
+    }
   }
 
   // apparently it is important to not go straight to the API
@@ -26,7 +28,6 @@ class MyServicesView {
       // returns a json object of all out haircuts and store in variable
       // this takes some time so we need to do this asynchronously
       this.services = await ServiceAPI.getServices();
-      console.log(this.services);
       // re renders the page now that we have loaded the services in
       this.render();
     } catch (err) {

@@ -151,6 +151,11 @@ customElements.define(
               display: none;
             }
           }
+
+          .title {
+            font-family: var(--secondary-font-family);
+            color: var(--sl-color-primary-500);
+          }
         </style>
 
         <header class="app-header">
@@ -173,9 +178,7 @@ customElements.define(
 
             <!-- can access a user becuase they are passed into components as a property -->
             ${this.user.accessLevel == 2
-              ? html`<a href="/newHaircut" @click="${anchorRoute}"
-                  >Add Haircut</a
-                >`
+              ? html`<a href="/users" @click="${anchorRoute}">See users</a>`
               : html``}
             <sl-dropdown>
               <a slot="trigger" href="#" @click="${(e) => e.preventDefault()}">
@@ -203,12 +206,12 @@ customElements.define(
         </header>
 
         <sl-drawer class="app-side-menu" placement="left">
-          <img class="app-side-menu-logo" src="/images/logo.svg" />
+          <h2 class="title">Platinum Property</h2>
           <nav class="app-side-menu-items">
             <a href="/" @click="${this.menuClick}">Home</a>
             ${this.user.accessLevel == 2
-              ? html`<a href="/newHaircut" @click="${this.menuClick}"
-                  >Add Haircut</a
+              ? html`<a href="/users" @click="${this.menuClick}"
+                  >View clients</a
                 >`
               : html``}
             <a href="/services" @click="${this.menuClick}">Book a service</a>
