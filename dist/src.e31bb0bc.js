@@ -14320,7 +14320,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 class MyServicesView {
   init() {
-    document.title = "My Services"; // this is where the haircuts will be stored when they come in from the backend
+    document.title = "My Services"; // this is where the services will be stored when they come in from the backend
 
     this.services == null;
     this.render();
@@ -14335,7 +14335,7 @@ class MyServicesView {
 
   async getServices() {
     try {
-      // returns a json object of all out haircuts and store in variable
+      // returns a json object of all services and store in variable
       // this takes some time so we need to do this asynchronously
       this.services = await _ServiceAPI.default.getServices(); // re renders the page now that we have loaded the services in
 
@@ -14442,7 +14442,7 @@ class usersView {
 
   async getUsers() {
     try {
-      // returns a json object of all out haircuts and store in variable
+      // returns a json object of all out users and store in variable
       // this takes some time so we need to do this asynchronously
       this.users = await _UserAPI.default.getUsers();
       console.log(this.users); // re renders the page now that we have loaded the services in
@@ -16536,7 +16536,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <!-- <h1>", "</h1>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p> -->\n\n            <h1 class=\"title\">Edit Booking</h1>\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n\n            <h3 class=\"title\">Current booking details</h3>\n\n            <p>Service Type: ", "</p>\n            <p>Description: ", "</p>\n            <p>Start Date: ", "</p>\n            <p>Service Completed: ", "</p>\n            <p>Agent Notes: ", "</p>\n\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input type=\"hidden\" name=\"id\" value=\"", "\" />\n\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  value=\"\"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"endDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"end date: \"\n                  value=\"\"\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                  value=\"", "\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Edit Booking</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
+  const data = _taggedTemplateLiteral(["<style>\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n          }\n          .content {\n            padding-left: 1em;\n          }\n          .gender span,\n          .length span {\n            text-transform: uppercase;\n            font-weight: bold;\n          }\n          .price {\n            font-size: 1.5em;\n            color: var(--brand-color);\n          }\n        </style>\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <!-- <h1>", "</h1>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p>\n            <p>", "</p> -->\n\n            <h1 class=\"title\">Edit Booking</h1>\n            <!-- when the form is submitted it will run the SubmitHandler form -->\n\n            <h3 class=\"title\">Current booking details</h3>\n\n            <p>Service Type: ", "</p>\n            <p>Description: ", "</p>\n            <p>Start Date: ", "</p>\n            <p>Service Completed: ", "</p>\n            <p>Agent Notes: ", "</p>\n\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input type=\"hidden\" name=\"id\" value=\"", "\" />\n\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  value=\"\"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"endDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"end date: \"\n                  value=\"\"\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                  value=\"", "\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Edit Booking</sl-button\n              >\n            </sl-form>\n          </div>\n        </div>"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16708,7 +16708,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  const data = _taggedTemplateLiteral(["<style>\n          .container {\n            width: 500px;\n            height: 500px;\n            border: 2px solid #333;\n          }\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n            height: 200px;\n            object-fit: cover;\n            display: block;\n          }\n          .content {\n            padding-left: 1em;\n          }\n        </style>\n\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1 class=\"title\">", "</h1>\n            <p>", "</p>\n\n            <!-- Booking form -->\n            <!-- when the form is submitted it will run the newHaircutSubmitHandler form -->\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Book Now</sl-button\n              >\n            </sl-form>\n          </div>\n        </div> "]);
+  const data = _taggedTemplateLiteral(["<style>\n          .container {\n            width: 500px;\n            height: 500px;\n            border: 2px solid #333;\n          }\n          .wrap {\n            display: flex;\n          }\n          .image {\n            width: 50%;\n          }\n          .image img {\n            width: 100%;\n            height: 200px;\n            object-fit: cover;\n            display: block;\n          }\n          .content {\n            padding-left: 1em;\n          }\n        </style>\n\n        <div class=\"wrap\">\n          <div class=\"image\">\n            <img src=\"", "\" alt=\"", "\" />\n          </div>\n          <div class=\"content\">\n            <h1 class=\"title\">", "</h1>\n            <p>", "</p>\n\n            <!-- Booking form -->\n            <!-- when the form is submitted it will run the newBookingtSubmitHandler form -->\n            <sl-form\n              class=\"page-form\"\n              @sl-submit=", "\n            >\n              <!-- user is submitted in hidden field -->\n              <input\n                type=\"hidden\"\n                name=\"user\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"serviceType\"\n                value=\"", "\"\n              />\n              <input\n                type=\"hidden\"\n                name=\"image\"\n                value=\"", ".jpg\"\n              />\n              <div class=\"input-group\">\n                <sl-input\n                  name=\"startDate\"\n                  type=\"date\"\n                  placeholder=\"Date\"\n                  label=\"Preferred date: \"\n                  required\n                ></sl-input>\n              </div>\n              <div class=\"input-group\">\n                <sl-textarea\n                  name=\"agentNotes\"\n                  rows=\"3\"\n                  placeholder=\"notes\"\n                ></sl-textarea>\n              </div>\n              <sl-button type=\"primary\" class=\"submit-btn\" submit\n                >Book Now</sl-button\n              >\n            </sl-form>\n          </div>\n        </div> "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16776,11 +16776,10 @@ customElements.define("va-service-type", class ServiceType extends _litElement.L
   async newBookingSubmitHandler(e) {
     // sl form still behaves like a normal form in that its default
     // behaviour is to refresh the page on submit
-    e.preventDefault(); // Send form data to HaircutAPI.newHaircut() to pass on to the db
-
+    e.preventDefault();
     const submitBtn = document.querySelector(".submit-btn");
     submitBtn.setAttribute("loading", "");
-    const formData = e.detail.formData; // the rest of the logic will be handled in the HaircutAPI which we have to import
+    const formData = e.detail.formData; // the rest of the logic will be handled in the ServiceAPI which we have to import
     // to get access to. because it needs to happen async put in a try catch
 
     try {
@@ -17026,7 +17025,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59529" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61169" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
